@@ -37,5 +37,9 @@ public class Customer {
 	public ArrayList<SavingsAccount> getAccount(){
 		return savingsAccounts;
 	}
+	
+	public void removeAccount(SavingsAccount sa){
+		savingsAccounts.remove(sa);
+	}
 
 }
