@@ -29,5 +29,13 @@ public class Customer {
 		this.pNr = pNr;
 	}
 	
+	public void addAccount(SavingsAccount sa){
+		savingsAccounts.add(sa);
+		
+	}
+	
+	public ArrayList<SavingsAccount> getAccount(){
+		return savingsAccounts;
+	}
 
 }
