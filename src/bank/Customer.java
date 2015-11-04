@@ -31,15 +31,18 @@ public class Customer {
 	
 	public void addAccount(SavingsAccount sa){
 		savingsAccounts.add(sa);
-		
 	}
 	
-	public ArrayList<SavingsAccount> getAccount(){
+	public ArrayList<SavingsAccount> getAccounts(){
 		return savingsAccounts;
 	}
 	
 	public void removeAccount(SavingsAccount sa){
 		savingsAccounts.remove(sa);
+	}
+	
+	public int getNbrOfAccounts(){
+		return savingsAccounts.size();
 	}
 
 }
