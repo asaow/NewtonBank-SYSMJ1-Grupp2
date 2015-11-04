@@ -58,7 +58,7 @@ public class BankLogic {
 			_list.add( String.format("%s: %s", _cust.getpNr(), _cust.getName()) );
 			
 			for (SavingsAccount ac : _cust.getAccounts()) {
-				_list.add( String.format("%s: %s", ac.getId(), ac.getType()) );
+				_list.add( String.format("%s, Kontonr: %s", ac.getType(), ac.getId()) );
 			}		
 		}
 		
@@ -104,14 +104,14 @@ public class BankLogic {
 			
 			for (SavingsAccount sa : _account ) {
 				_balance = sa.getBalance();
-				_result.add( String.format("%s: %s %.2d", sa.getId(), sa.getType(), _balance ));
+				_result.add( String.format("%s, Kontonr: %s, Saldo: %.2d, R‰nta: %.2d", sa.getType(), sa.getId(), _balance, sa.getRate() ));
 				
 				_totalBalance += _balance;
 				_totalRate += _balance * sa.getRate() / 100;
 			}
 			
-			_result.add("Balance total: " + _totalBalance );
-			_result.add("Rate total" + _totalRate);
+			_result.add("Totala saldo: " + _totalBalance );
+			_result.add("Totala r‰nta:" + _totalRate);
 
 			_customers.remove(_cust);
 			
@@ -152,7 +152,7 @@ public class BankLogic {
 		if (_cust != null) {
 			SavingsAccount _account = getAccountById(_cust, accountId);
 			if (_account != null)
-				return String.format("Konto %s: \nBalance: %s\nRate: %s\nType: %s", _account.getId(), _account.getBalance(), _account.getRate(), _account.getType()); 
+				return String.format("Typ: %s\nKontonr: %s\nSaldo:  %.2d\nR‰nta: %.2d", _account.getId(), _account.getBalance(), _account.getRate(), _account.getType()); 
 		}
 
 		return null;
@@ -219,15 +219,18 @@ public class BankLogic {
 	 * @return presentation av kontots saldo samt r√§nta p√• pengarna ska returneras
 	 */
 	public String closeAccount(long pNr, int accountId) {
+		double _totalRate = 0;
 		Customer _cust = getCustomerByPNr(pNr); 
+
 
 		if (_cust != null) {
 			SavingsAccount _account = getAccountById(_cust, accountId);
 
 			if (_account != null) {
+				_totalRate += _account.getBalance() * _account.getRate() / 100;
 				_cust.removeAccount(_account);
 				
-				return String.format("Balance: s1\nRate: s2", _account.getBalance(), _account.getRate());
+				return String.format("Saldo: %.2d\nR‰nta: %.2d", _account.getBalance(), _totalRate);
 			}
 		}
 
