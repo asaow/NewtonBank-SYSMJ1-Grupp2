@@ -39,7 +39,7 @@ public class BankLogic {
 		if (getCustomerByPNr(pNr) != null)
 			return false;		
 
-		_customers.add( new Customer(pNr, name) );
+		_customers.add(new Customer(name, pNr) );
 		return true;		
 	}
 
