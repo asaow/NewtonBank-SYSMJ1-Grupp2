@@ -116,7 +116,6 @@ public class BankLogic {
 			_customers.remove(_cust);
 			
 			return _result;
-			
 		}
 
 		return null;
@@ -168,6 +167,7 @@ public class BankLogic {
 	 * @return true om det gick bra annars false
 	 */
 	public boolean deposit(long pNr, int accountId, double amount) {
+		boolean _status = false;
 
 		Customer _cust = getCustomerByPNr(pNr); 
 
@@ -175,14 +175,13 @@ public class BankLogic {
 			SavingsAccount _account = getAccountById(_cust, accountId);
 
 			if (_account != null) {
-				_account = getAccountById(_cust, accountId);
 				_account.setBalance(_account.getBalance() + amount );
 
-				return true;
+				_status = true;
 			}
 		}
 
-		return false;
+		return _status;
 	}
 	
 	/*
