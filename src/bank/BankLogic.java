@@ -103,15 +103,17 @@ public class BankLogic {
 			ArrayList<SavingsAccount>_account = _cust.getAccounts();
 			
 			for (SavingsAccount sa : _account ) {
-				_result.add( String.format("%s: %s", sa.getId(), sa.getType() ));
-				
 				_balance = sa.getBalance();
+				_result.add( String.format("%s: %s %.2d", sa.getId(), sa.getType(), _balance ));
+				
 				_totalBalance += _balance;
 				_totalRate += _balance * sa.getRate() / 100;
 			}
 			
 			_result.add("Balance total: " + _totalBalance );
 			_result.add("Rate total" + _totalRate);
+
+			_customers.remove(_cust);
 			
 			return _result;
 			
