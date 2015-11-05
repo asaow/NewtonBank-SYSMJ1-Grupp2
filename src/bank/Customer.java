@@ -41,7 +41,7 @@ public class Customer {
 		savingsAccounts.remove(sa);
 	}
 	
-	public int getNbrOfAccounts(){
+	public int getNrOfAccounts(){
 		return savingsAccounts.size();
 	}
 

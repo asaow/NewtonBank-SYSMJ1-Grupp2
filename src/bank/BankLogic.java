@@ -270,6 +270,8 @@ public class BankLogic {
 	 * @return SavingsAccount om konto finns annars null
 	 */
 	public SavingsAccount getAccountById(Customer cust, int accountId) {
+		if (cust == null)	return null;
+		
 		SavingsAccount _account = null;
 		
 		for (SavingsAccount _ac : cust.getAccounts()) {

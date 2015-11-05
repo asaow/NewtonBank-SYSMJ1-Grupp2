@@ -47,7 +47,7 @@ public class CustomerTest {
 		SavingsAccount sa = new SavingsAccount(1003, 0.1);
 		Customer c = new Customer("ggg", 455);
 		c.addAccount(sa);
-		Assert.assertEquals(c.getNbrOfAccounts(),1); //Checkar hur många accounts det finns i listan. (Vi vet listan var tom från början och att värdet är nu 1)
+		Assert.assertEquals(c.getNrOfAccounts(),1); //Checkar hur många accounts det finns i listan. (Vi vet listan var tom från början och att värdet är nu 1)
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class CustomerTest {
 		//Checkar hur många accounts det finns i listan. 
 		//Vi vet listan har värdet 3 efter att vi lagt till alla accounts
 		//värdet är nu 2 efter att vi har tagit bort ett account
-		Assert.assertEquals(c.getNbrOfAccounts(),2); 
+		Assert.assertEquals(c.getNrOfAccounts(),2); 
 		
 	}
 	
