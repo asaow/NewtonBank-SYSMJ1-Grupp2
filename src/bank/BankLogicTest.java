@@ -30,6 +30,7 @@ public class BankLogicTest {
 	// Test om en kund existerar
 	@Test
 	public void testgetCustomerByPNr() {
+		// Hämta en kund som existerar
 		_banklogic.addCustomer("anna", 12345);
 		Assert.assertNotNull("Skall inte vara Null", _banklogic.getCustomerByPNr(12345));
 
@@ -125,13 +126,13 @@ public class BankLogicTest {
 
 		// skapa ett konto till kunden
 		_banklogic.addSavingsAccount(pNr);
-//System.out.println(_banklogic.getCustomerByPNr(pNr).getAccounts().get(0).getId());
+
 		// hämta ett konto som existera
 		Assert.assertNotNull("Skall inte vara Null", _banklogic.getAccount( pNr, 1001 ));
 
 		// hämta ett konto som inte existera
-		//Assert.assertNull("Skall vara Null", _banklogic.getAccount( pNr, 1005 ));
-		//Assert.assertNull("Skall vara Null", _banklogic.getAccount( 0, 1001 ));
+		Assert.assertNull("Skall vara Null", _banklogic.getAccount( pNr, 1005 ));
+		Assert.assertNull("Skall vara Null", _banklogic.getAccount( 0, 1001 ));
 	}
 
 	// Test insättning
@@ -155,7 +156,7 @@ public class BankLogicTest {
 
 	// Test uttag
 	@Test
-	public void testwithDraw() {
+	public void testwithdraw() {
 		int pNr = 12345;
 
 		// skapa en kund
