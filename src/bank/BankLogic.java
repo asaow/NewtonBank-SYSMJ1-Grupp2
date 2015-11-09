@@ -3,19 +3,19 @@ package bank;
 import java.util.ArrayList;
 
 /*
-   Klassen BankLogic ska innehålla en lista med alla kunder 
+   Klassen BankLogic ska innehÃ¥lla en lista med alla kunder 
    och ett antal publika metoder som hanterar kunder och dess konton
 */
 public class BankLogic {
 	private ArrayList<Customer> _customers;
-	private int _counter = 1000;	// räknare till kontonr
+	private int _counter = 1000;	// rÃ¤knare till kontonr
 	
 	public BankLogic() {
 		_customers = new ArrayList<>();
 	}
 	
 	/*
-	 * @return en lista som innehåller en presentation av bankens alla kunder
+	 * @return en lista som innehÃ¥ller en presentation av bankens alla kunder
 	 */
 	public ArrayList<String> getCustomers() {
 		ArrayList<String> _list = new ArrayList<>();
@@ -28,7 +28,7 @@ public class BankLogic {
 	}
 
 	/*
-	 * Skapar en ny kund, kunden skapas endast om det inte finns någon kund med personnr
+	 * Skapar en ny kund, kunden skapas endast om det inte finns nÃ¥gon kund med personnr
 	 *
 	 * @param namn
 	 * @param personnr
@@ -45,7 +45,7 @@ public class BankLogic {
 
 	/*
 	 * @param personnr 
-	 * @return en lista som innehåller informationen om kunden inklusive dennes konton
+	 * @return en lista som innehÃ¥ller informationen om kunden inklusive dennes konton
 	 */
 	public ArrayList<String> getCustomer(long pNr) {		
 		ArrayList<String> _list = null;
@@ -66,11 +66,11 @@ public class BankLogic {
 	}
 	
 	/*
-	 * Byter namn på en kund
+	 * Byter namn pÃ¥ en kund
 	 *
 	 * @param name
 	 * @param personnr
-	 * @return true om namnet ändrades annars returnerar false
+	 * @return true om namnet Ã¤ndrades annars returnerar false
 	 */
 	public boolean changeCustomerName(String name, long pNr) {
 
@@ -85,12 +85,12 @@ public class BankLogic {
 	
 	/*
 	 * Tar bort en kund med personnr ur banken, alla kundens eventuella 
-	 * konton tas också bort och resultatet returneras
+	 * konton tas ocksÃ¥ bort och resultatet returneras
 	 *
 	 * @param personnr
-	 * @return Listan som returneras ska innehålla information om alla 
-	 *         konton som togs bort, saldot som kunden får tillbaka samt 
-	 *         vad räntan blev
+	 * @return Listan som returneras ska innehÃ¥lla information om alla 
+	 *         konton som togs bort, saldot som kunden fÃ¥r tillbaka samt 
+	 *         vad rÃ¤ntan blev
 	 */
 	public ArrayList<String> removeCustomer(long pNr) {
 		double _balance;
@@ -104,14 +104,14 @@ public class BankLogic {
 			
 			for (SavingsAccount sa : _account ) {
 				_balance = sa.getBalance();
-				_result.add( String.format("%s, Kontonr: %d, Saldo: %.2f, Ränta: %.2f", sa.getType(), sa.getId(), _balance, sa.getRate() ));
+				_result.add( String.format("%s, Kontonr: %s, Saldo: %.2d, RÃ¤nta: %.2d", sa.getType(), sa.getId(), _balance, sa.getRate() ));
 				
 				_totalBalance += _balance;
 				_totalRate += _balance * sa.getRate() / 100;
 			}
 			
 			_result.add("Totala saldo: " + _totalBalance );
-			_result.add("Totala ränta:" + _totalRate);
+			_result.add("Totala rÃ¤nta:" + _totalRate);
 
 			_customers.remove(_cust);
 			
@@ -143,7 +143,7 @@ public class BankLogic {
 	}
 
 	/*
-	 * @return en sträng som innehåller kontonr, saldo, kontotyp, räntesats
+	 * @return en strÃ¤ng som innehÃ¥ller kontonr, saldo, kontotyp, rÃ¤ntesats
 	 */
 	public String getAccount(long pNr, int accountId) {
 
@@ -152,14 +152,14 @@ public class BankLogic {
 		if (_cust != null) {
 			SavingsAccount _account = getAccountById(_cust, accountId);
 			if (_account != null)
-				return String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", _account.getType(), _account.getId(), _account.getBalance(), _account.getRate() ); 
+				return String.format("Typ: %s\nKontonr: %s\nSaldo:  %.2d\nRÃ¤nta: %.2d", _account.getId(), _account.getBalance(), _account.getRate(), _account.getType()); 
 		}
 
 		return null;
 	}
 	
 	/*
-	 * Gör en insättning på konto med kontonr som tillhör kunden
+	 * Gï¿½r en insÃ¤ttning pÃ¥ konto med kontonr som tillhÃ¶r kunden
 	 * 
 	 * @param personnr
 	 * @param kontonr
@@ -185,7 +185,7 @@ public class BankLogic {
 	}
 	
 	/*
-	 * Gör ett uttag på konto med kontonr som tillhör kunden
+	 * GÃ¶r ett uttag pÃ¥ konto med kontonr som tillhÃ¶r kunden
 	 * 
 	 * @param personnr
 	 * @param kontonr
@@ -212,11 +212,11 @@ public class BankLogic {
 	}
 
 	/*
-	 * Stänger ett konto med kontonr som tillhör kunden
+	 * StÃ¤nger ett konto med kontonr som tillhÃ¶r kunden
 	 *
 	 * @param personnr
 	 * @param kontonr
-	 * @return presentation av kontots saldo samt ränta på pengarna ska returneras
+	 * @return presentation av kontots saldo samt rÃ¤nta pÃ¥ pengarna ska returneras
 	 */
 	public String closeAccount(long pNr, int accountId) {
 		double _totalRate = 0;
@@ -230,7 +230,7 @@ public class BankLogic {
 				_totalRate += _account.getBalance() * _account.getRate() / 100;
 				_cust.removeAccount(_account);
 				
-				return String.format("Saldo: %.2f\nRänta: %.2f", _account.getBalance(), _totalRate);
+				return String.format("Saldo: %.2d\nRÃ¤nta: %.2d", _account.getBalance(), _totalRate);
 			}
 		}
 
@@ -245,7 +245,7 @@ public class BankLogic {
 	}
 	
 	/*
-	 * Söka på en kund
+	 * SÃ¶ka pÃ¥ en kund
 	 *
 	 * @param personnr
 	 * @return Customer om kunden finns annars null
@@ -263,7 +263,7 @@ public class BankLogic {
 	}
 	
 	/*
-	 * Söka på ett konto i en kund
+	 * SÃ¶ka pÃ¥ ett konto i en kund
 	 *
 	 * @param kund
 	 * @param kontonr
