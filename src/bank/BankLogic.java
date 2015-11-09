@@ -104,7 +104,7 @@ public class BankLogic {
 			
 			for (SavingsAccount sa : _account ) {
 				_balance = sa.getBalance();
-				_result.add( String.format("%s, Kontonr: %s, Saldo: %.2d, Ränta: %.2d", sa.getType(), sa.getId(), _balance, sa.getRate() ));
+				_result.add( String.format("%s, Kontonr: %d, Saldo: %.2f, Ränta: %.2f", sa.getType(), sa.getId(), _balance, sa.getRate() ));
 				
 				_totalBalance += _balance;
 				_totalRate += _balance * sa.getRate() / 100;
@@ -152,7 +152,7 @@ public class BankLogic {
 		if (_cust != null) {
 			SavingsAccount _account = getAccountById(_cust, accountId);
 			if (_account != null)
-				return String.format("Typ: %s\nKontonr: %s\nSaldo:  %.2d\nRänta: %.2d", _account.getId(), _account.getBalance(), _account.getRate(), _account.getType()); 
+				return String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", _account.getType(), _account.getId(), _account.getBalance(), _account.getRate() ); 
 		}
 
 		return null;
@@ -230,7 +230,7 @@ public class BankLogic {
 				_totalRate += _account.getBalance() * _account.getRate() / 100;
 				_cust.removeAccount(_account);
 				
-				return String.format("Saldo: %.2d\nRänta: %.2d", _account.getBalance(), _totalRate);
+				return String.format("Saldo: %.2f\nRänta: %.2f", _account.getBalance(), _totalRate);
 			}
 		}
 
