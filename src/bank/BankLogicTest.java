@@ -5,11 +5,7 @@ import org.junit.Test;
 
 public class BankLogicTest {
 	private BankLogic _banklogic = new BankLogic();
-	
-//	@Test
-//	public void test() {
-//
-//	}
+
 	
 	// Test lägga till kunder
 	@Test
