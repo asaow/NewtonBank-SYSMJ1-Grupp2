@@ -21,35 +21,35 @@ public class SavingsAccount {
 		_type = SavingsAccount.SAVING_ACCOUNT_TYPE;
 	}
 	
-	/*
+	/**
 	 * @return saldo
 	 */
 	public double getBalance() {
 		return _balance;
 	}
 
-	/*
+	/**
 	 * @return ränta 
 	 */
 	public double getRate() {
 		return _rate;
 	}
 	
-	/*
+	/**
 	 * @return vilka typ av konto 
 	 */	
 	public String getType() {
 		return _type;
 	}
 	
-	/*
+	/**
 	 * @return kontonr 
 	 */
 	public int getId() {
 		return _accountId;
 	}
 	
-	/*
+	/**
 	 * sätta vilka kontotyp
 	 * 
 	 * @param kontotyp 
@@ -58,7 +58,7 @@ public class SavingsAccount {
 		_type = type;
 	}
 	
-	/*
+	/**
 	 * sätta saldo på konto
 	 * 
 	 * @param saldo på beloppet 
