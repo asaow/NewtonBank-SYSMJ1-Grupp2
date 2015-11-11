@@ -1,4 +1,4 @@
-﻿package bank;
+package bank;
 
 import static org.junit.Assert.*;
 
