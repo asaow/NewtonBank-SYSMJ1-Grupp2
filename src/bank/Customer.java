@@ -27,7 +27,7 @@ public class Customer {
 	
 	/**
 	 * Sätter kundens namn
-	 * @param name
+	 * @param name namn på kunden
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -43,7 +43,7 @@ public class Customer {
 	
 	/**
 	 * Sätter kundens personnummer
-	 * @param pNr
+	 * @param pNr personnr
 	 */
 	public void setpNr(long pNr) {
 		this.pNr = pNr;
@@ -51,7 +51,7 @@ public class Customer {
 	
 	/**
 	 * Lägger till ett konto i en lista till kund 
-	 * @param sa
+	 * @param sa ett SavingsAccount object
 	 */
 	public void addAccount(SavingsAccount sa){
 		savingsAccounts.add(sa);
@@ -67,7 +67,7 @@ public class Customer {
 	
 	/**
 	 * Ta bort konto från kundens lista
-	 * @param sa
+	 * @param sa ett SavingsAccount object
 	 */
 	public void removeAccount(SavingsAccount sa){
 		savingsAccounts.remove(sa);

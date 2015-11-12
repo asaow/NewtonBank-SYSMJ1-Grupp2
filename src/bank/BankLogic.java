@@ -148,6 +148,10 @@ public class BankLogic {
 	}
 
 	/**
+	 * Hämta imformation på en person konto
+	 * 
+	 * @param pNr personnr
+	 * @param accountId kontonr 
 	 * @return en sträng som innehåller kontonr, saldo, kontotyp, räntesats
 	 */
 	public String getAccount(long pNr, int accountId) {
@@ -168,7 +172,7 @@ public class BankLogic {
 	 * 
 	 * @param pNr personnr
 	 * @param accountId ett kontonr
-	 * @param belopp som sätts in
+	 * @param amount belopp som sätts in
 	 * @return true om det lyckades annars false
 	 */
 	public boolean deposit(long pNr, int accountId, double amount) {
@@ -194,7 +198,7 @@ public class BankLogic {
 	 * 
 	 * @param pNr personnr
 	 * @param accountId ett kontonr
-	 * @param belopp som dras från konto
+	 * @param amount belopp som dras från konto
 	 * @return true om det lyckades annars false
 	 */
 	public boolean withdraw(long pNr, int accountId, double amount) {

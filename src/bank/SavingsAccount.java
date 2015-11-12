@@ -11,8 +11,8 @@ public class SavingsAccount {
 	/**
 	 * Konstruktor
 	 *
-	 * @param kontonr
-	 * @param ränta
+	 * @param accountId kontonr
+	 * @param rate räntan på konto
 	 */
 	public SavingsAccount(int accountId, double rate) {
 		_balance = 0;
@@ -22,14 +22,14 @@ public class SavingsAccount {
 	}
 	
 	/**
-	 * @return saldo
+	 * @return saldo på konto
 	 */
 	public double getBalance() {
 		return _balance;
 	}
 
 	/**
-	 * @return ränta 
+	 * @return ränta på konto
 	 */
 	public double getRate() {
 		return _rate;
@@ -52,7 +52,7 @@ public class SavingsAccount {
 	/**
 	 * sätta vilka kontotyp
 	 * 
-	 * @param kontotyp 
+	 * @param type kontotyp 
 	 */
 	public void setType(String type) {
 		_type = type;
@@ -61,7 +61,7 @@ public class SavingsAccount {
 	/**
 	 * sätta saldo på konto
 	 * 
-	 * @param saldo på beloppet 
+	 * @param balance saldo på beloppet 
 	 */
 	public void setBalance(double balance) {
 		_balance = balance;
