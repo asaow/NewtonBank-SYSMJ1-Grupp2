@@ -15,8 +15,33 @@ public class Helper {
 	 * @return true om personnr är ett giltig nr annars false
 	 */
 	public static boolean isValidPNr(String pNr) {
+		for (int i = 0; i < pNr.length(); i++) {
+			int sLength = pNr.length();
+			if (sLength != 12){
+				return false;
+			}
+			if (!Character.isDigit(pNr.charAt(i))) {
+				return false;
+			}
+		}
 
-		return true;
+		String year = pNr.substring(0, 4);
+		int y = Integer.parseInt(year);
+
+		String month = pNr.substring(4, 6);
+		int m = Integer.parseInt(month);		
+
+		String date = pNr.substring(6, 8);
+		int d = Integer.parseInt(date);	
+
+		String lastFour = pNr.substring(8, 12);
+		int lf = Integer.parseInt(lastFour);
+
+		if(y>=1900 && y<=2015 && m>=1 && m<=12 && d>=1 && d<=31 && lf>0 && lf<=9999){
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
