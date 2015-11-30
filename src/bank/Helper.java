@@ -8,7 +8,6 @@ import java.util.ArrayList;
 /**
  * Klassen Helper innehåler olika hjälp metoder för att 
  * checka format på en sträng.
- *
  */
 public class Helper {
 	
@@ -67,7 +66,7 @@ public class Helper {
 		try  {
 			Double d = Double.parseDouble(nr);
 			String ss = d.toString();
-			String [] namesplit = ss.split("\\.");
+			String[] namesplit = ss.split("\\.");
 
 			if(!(namesplit[1].length()<=2))
 				return false;
