@@ -1,4 +1,8 @@
 package bank;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 /**
@@ -15,14 +19,12 @@ public class Helper {
 	 * @return true om personnr är ett giltig nr annars false
 	 */
 	public static boolean isValidPNr(String pNr) {
-		if (pNr.length() != 12){
+		if (pNr.length() != 12)
 			return false;
-		}
 		
 		for (int i = 0; i < pNr.length(); i++) {
-			if (!Character.isDigit(pNr.charAt(i))) {
+			if (!Character.isDigit(pNr.charAt(i))) 
 				return false;
-			}
 		}
 
 		String year = pNr.substring(0, 4);
@@ -37,7 +39,7 @@ public class Helper {
 		String lastFour = pNr.substring(8, 12);
 		int lf = Integer.parseInt(lastFour);
 
-		if(y>=1900 && y<=2015 && m>=1 && m<=12 && d>=1 && d<=31 && lf>0 && lf<=9999){
+		if (y>=1900 && y<=2015 && m>=1 && m<=12 && d>=1 && d<=31 && lf>0 && lf<=9999) {
 			return true;
 		}
 
@@ -67,17 +69,13 @@ public class Helper {
 			String ss = d.toString();
 			String [] namesplit = ss.split("\\.");
 
-			if(!(namesplit[1].length()<=2)){
+			if(!(namesplit[1].length()<=2))
 				return false;
-			}
 
-			if(nr.endsWith(".")){
+			if(nr.endsWith("."))
 				return false;
-			}
-
-		}
-		catch(NumberFormatException ex)
-		{
+			
+		} catch(NumberFormatException ex) {
 			return false;
 		}
 
@@ -107,13 +105,20 @@ public class Helper {
 	}
 
 	/**
-	 * Spara en lista med kunden namn på en fil
+	 * Spara till fil
 	 *
-	 * @param name Array med namn på kunden
-	 * @return true på filen har sparat annars false
+	 * @param path sökväg till filen
+	 * @param data sträng som skall spara
+	 * @return true om filen lyckas sparat annars false
 	 */
-	public static boolean SaveToFile(ArrayList<String> name) {
+	public static boolean saveToFile(Path path, String data) {
 
-		return true;
+		try {
+			Files.write(path, data.getBytes("utf-8"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+			return true;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 }

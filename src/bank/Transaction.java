@@ -9,7 +9,16 @@ public class Transaction {
 	private String transType;
 	private double amount;
 	private double balance;
-	
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param accountId kontonr
+	 * @param transType transaktion typ insättning/uttag
+	 * @param dateTime datum för transaktion
+	 * @param amount belopp på transaktion
+	 * @param balance saldo efter transaktion
+	 */
 	public Transaction(int accountId, String dateTime, String transType, double amount, double balance){
 		this.accountId = accountId;
 		this.dateTime = dateTime;
@@ -89,6 +98,4 @@ public class Transaction {
 	public void setType(String transType) {
 		this.transType = transType;
 	}
-	
-
 }
