@@ -15,11 +15,11 @@ public class Helper {
 	 * @return true om personnr är ett giltig nr annars false
 	 */
 	public static boolean isValidPNr(String pNr) {
+		if (pNr.length() != 12){
+			return false;
+		}
+		
 		for (int i = 0; i < pNr.length(); i++) {
-			int sLength = pNr.length();
-			if (sLength != 12){
-				return false;
-			}
 			if (!Character.isDigit(pNr.charAt(i))) {
 				return false;
 			}
@@ -62,6 +62,24 @@ public class Helper {
 	 * @return true om ett tal är giltig annars false
 	 */
 	public static boolean isValidNr(String nr) {
+		try  {
+			Double d = Double.parseDouble(nr);
+			String ss = d.toString();
+			String [] namesplit = ss.split("\\.");
+
+			if(!(namesplit[1].length()<=2)){
+				return false;
+			}
+
+			if(nr.endsWith(".")){
+				return false;
+			}
+
+		}
+		catch(NumberFormatException ex)
+		{
+			return false;
+		}
 
 		return true;
 	}
