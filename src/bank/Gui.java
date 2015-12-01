@@ -24,7 +24,7 @@ public class Gui implements ItemListener {
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { SEEKCUSTOMER, NEWCUSTOMER, SHOWCUSTOMERINFO,  CHANGECUSTOMERNAME, DELETECUSTOMER, SEEKACCOUNT,
+        String comboBoxItems[]= { SEEKCUSTOMER, NEWCUSTOMER, SHOWCUSTOMERINFO,  CHANGECUSTOMERNAME, DELETECUSTOMER, SEEKACCOUNT,
         		SEEKTRANSACTION, ADDSAVINGSACCOUNT, ADDCREDITACCOUNT, DELETEACCOUNT, DEPOSIT, WITHDRAWL, SHOWCUSTOMERLIST, 
         		EXPORTTOFILE};
         JComboBox cb = new JComboBox(comboBoxItems);
@@ -127,11 +127,7 @@ public class Gui implements ItemListener {
         cl.show(card, (String)evt.getItem());
     }
 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
+  
     private static void createAndShowGUI() {
         //Make sure we have nice window decorations.
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -150,8 +146,7 @@ public class Gui implements ItemListener {
     }
 
     public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
+        
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
