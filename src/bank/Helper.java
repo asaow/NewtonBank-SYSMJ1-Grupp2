@@ -53,7 +53,18 @@ public class Helper {
 	 */
 	public static boolean isValidName(String name) {
 
-		return true;
+		String [] wordArray = name.split(" ");
+		int wordCount = wordArray.length;
+	
+		if( wordCount > 1 && wordCount < 5 ) {
+			if(name.matches("[a-zåäö ]+")) {
+			      return true;
+			}
+			else {
+			      return false;
+			}
+		} else 
+			return false;
 	}
 
 	/**
