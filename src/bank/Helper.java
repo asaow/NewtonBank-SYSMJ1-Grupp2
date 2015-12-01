@@ -53,18 +53,15 @@ public class Helper {
 	 */
 	public static boolean isValidName(String name) {
 
-		String [] wordArray = name.split(" ");
+		String[] wordArray = name.split(" ");
 		int wordCount = wordArray.length;
 	
 		if( wordCount > 1 && wordCount < 5 ) {
-			if(name.matches("[a-zåäö ]+")) {
+			if(name.matches("[a-zåäö ]+"))
 			      return true;
-			}
-			else {
-			      return false;
-			}
-		} else 
-			return false;
+		} 
+			
+		return false;
 	}
 
 	/**
@@ -99,8 +96,14 @@ public class Helper {
 	 * @return true om kontonr är ett giltig nr annars false
 	 */
 	public static boolean isValidAccountId(String nr) {
-
-		return true;
+		try {
+			int number = Integer.parseInt(nr);
+			if (number > 1000)	return true;
+		
+		} catch (NumberFormatException ex) {	
+		}
+		
+		return false;
 	}	
 
 	/**
@@ -110,8 +113,12 @@ public class Helper {
 	 * @return namnet med stora bokstäver på första tecken
 	 */
 	public static String toUpperCaseLetter(String name) {
-
-		return "new string";
+		String[] arrWord = name.split(" ");
+		
+		for (int i=0; i< arrWord.length; i++)
+			arrWord[i] = arrWord[i].substring(0,1).toUpperCase() + arrWord[i].substring(1); 
+		
+		return String.join(" ", arrWord);
 	}
 
 	/**
