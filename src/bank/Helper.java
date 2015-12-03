@@ -56,8 +56,8 @@ public class Helper {
 		String[] wordArray = name.split(" ");
 		int wordCount = wordArray.length;
 	
-		if( wordCount > 1 && wordCount < 5 ) {
-			if(name.matches("[a-zåäö ]+"))
+		if (wordCount > 1 && wordCount < 5 ) {
+			if (name.matches("[a-zåäöA-ZÅÄÖ ]+"))
 			      return true;
 		} 
 			
@@ -71,12 +71,12 @@ public class Helper {
 	 * @return true om ett tal är giltig annars false
 	 */
 	public static boolean isValidNr(String nr) {
-		try  {
-			Double d = Double.parseDouble(nr);
-			String ss = d.toString();
-			String[] namesplit = ss.split("\\.");
+		try {
+			Double num = Double.parseDouble(nr);
+			//String ss = num.toString().toString();
+			String[] arrName = num.toString().split("\\.");
 
-			if(!(namesplit[1].length()<=2))
+			if(!(arrName[1].length()<=2))
 				return false;
 
 			if(nr.endsWith("."))
