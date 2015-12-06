@@ -1,20 +1,15 @@
 package bank;
-import java.util.ArrayList;
 
 /**
- * Klassen Customer innehåller en kunds namn, personnummer och en lista på kundens konton
- * Finns publika metoder som lägger till och tar bort konton från listan
- *
+ * Klassen lagra en kund namn och personnr
  */
 public class Customer {
 	private String name;
 	private long pNr;
-	private ArrayList<SavingsAccount> savingsAccounts;
 
 	public Customer(String name, long pNr){
 		this.name=name;
 		this.pNr=pNr;
-		savingsAccounts = new ArrayList<>();
 	}
 	
 	/**
@@ -37,7 +32,7 @@ public class Customer {
 	 * Hämtar kundens personnummer
 	 * @return kundens personnummer
 	 */
-	public long getpNr() {
+	public long getPNr() {
 		return pNr;
 	}
 	
@@ -45,40 +40,7 @@ public class Customer {
 	 * Sätter kundens personnummer
 	 * @param pNr personnr
 	 */
-	public void setpNr(long pNr) {
+	public void setPNr(long pNr) {
 		this.pNr = pNr;
-	}
-	
-	/**
-	 * Lägger till ett konto i en lista till kund 
-	 * @param sa ett SavingsAccount object
-	 */
-	public void addAccount(SavingsAccount sa){
-		savingsAccounts.add(sa);
-	}
-	
-	/**
-	 * Hämtar lista med alla konton
-	 * @return en lista med kundens alla konton
-	 */
-	public ArrayList<SavingsAccount> getAccounts(){
-		return savingsAccounts;
-	}
-	
-	/**
-	 * Ta bort konto från kundens lista
-	 * @param sa ett SavingsAccount object
-	 */
-	public void removeAccount(SavingsAccount sa){
-		savingsAccounts.remove(sa);
-	}
-	
-	/**
-	 * Hämta storlek på listan med kundens konton
-	 * @return antalet konton som kunden har
-	 */
-	public int getNrOfAccounts(){
-		return savingsAccounts.size();
-	}
-
+	}	
 }
