@@ -73,9 +73,11 @@ public class Helper {
 	public static boolean isValidNr(String nr) {
 		try {
 			Double num = Double.parseDouble(nr);
-			//String ss = num.toString().toString();
-			String[] arrName = num.toString().split("\\.");
+			
+			// negativa tal ej tillåten
+			if (num < 0) return false;
 
+			String[] arrName = num.toString().split("\\.");
 			if(!(arrName[1].length()<=2))
 				return false;
 
@@ -116,9 +118,25 @@ public class Helper {
 		String[] arrWord = name.split(" ");
 		
 		for (int i=0; i< arrWord.length; i++)
-			arrWord[i] = arrWord[i].substring(0,1).toUpperCase() + arrWord[i].substring(1); 
+			arrWord[i] = arrWord[i].substring(0,1).toUpperCase() + arrWord[i].substring(1).toLowerCase(); 
 		
 		return String.join(" ", arrWord);
+	}
+
+	/**
+	 * Konvertera arrayList till en strämg
+	 *
+	 * @param arrStr arrayList av strängar
+	 * @return en strämg
+	 */
+	public static String listToString(ArrayList<String> arrStr) {
+		StringBuffer _sb = new StringBuffer();
+		
+		for (String _s : arrStr) {
+			_sb.append(_s + "\r\n");
+		}
+
+		return _sb.toString();
 	}
 
 	/**
