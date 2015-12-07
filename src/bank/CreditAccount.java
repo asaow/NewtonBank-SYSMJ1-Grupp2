@@ -63,7 +63,7 @@ public class CreditAccount extends Account {
 		double r = getRate();
 
 		if (super.getBalance() < 0) {
-			r = -getCreditRate();
+			r = getCreditRate();
 		}
 
 		return getBalance() * r / 100;

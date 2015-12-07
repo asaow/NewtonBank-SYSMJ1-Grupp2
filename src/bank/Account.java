@@ -40,7 +40,8 @@ public abstract class Account {
 	/**
 	 * sätta ränta på konto
 	 * 
-	 * @param rate ränta på konto
+	 * @param rate
+	 *            ränta på konto
 	 */
 	public void setRate(double rate) {
 		this.rate = rate;
@@ -49,7 +50,8 @@ public abstract class Account {
 	/**
 	 * sätta saldo på konto
 	 * 
-	 * @param balance saldo på beloppet
+	 * @param balance
+	 *            saldo på beloppet
 	 */
 	public void setBalance(double balance) {
 		this.balance = balance;
@@ -65,7 +67,8 @@ public abstract class Account {
 	/**
 	 * sätta kontotyp
 	 * 
-	 * @param type kontotyp
+	 * @param type
+	 *            kontotyp
 	 */
 	public void setType(String type) {
 		this.type = type;
@@ -74,37 +77,32 @@ public abstract class Account {
 	/**
 	 * Abstrakt metod
 	 * 
-	 * @return rate i respektive kontoklass
+	 * @return räntan i respektive kontoklass
 	 */
 	public abstract double calculateRate();
 
 	/**
 	 * Insättning på konto
 	 * 
-	 * @param amount belopp som skall lägga till konto
+	 * @param amount
+	 *            belopp som skall lägga till konto
 	 */
 	public boolean deposit(double amount) {
-		if (amount > 0)	{
+		if (amount > 0) {
 			setBalance(balance + amount);
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	/**
+	 * Abstrakt metod 
 	 * Uttag från konto
 	 * 
-	 * @param amount belopp som skall ta ut på konto
+	 * @param amount
+	 *            belopp som skall ta ut på konto
 	 * @return true om uttag lyckas annars false
 	 */
-	public boolean withdraw(double amount) {
-		if (amount < 0)	return false;
-		
-		if (balance - amount > 0) {
-			setBalance(balance - amount);
-			return true;
-		} else
-			return false;
-	}
+	public abstract boolean withdraw(double amount);
 }
