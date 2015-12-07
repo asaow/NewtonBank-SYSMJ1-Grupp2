@@ -60,11 +60,10 @@ public class CreditAccount extends Account {
 	 */
 	@Override
 	public double calculateRate() {
-		// saldo*ränta/100
 		double r = getRate();
 
 		if (super.getBalance() < 0) {
-			r = getCreditRate();
+			r = -getCreditRate();
 		}
 
 		return getBalance() * r / 100;
