@@ -1,6 +1,6 @@
 package bank;
 
-public class Transaction {
+public class Transactions {
 	public static final String TYPE_UT = "UT";
 	public static final String TYPE_IN = "IN";
 
@@ -19,7 +19,7 @@ public class Transaction {
 	 * @param amount belopp på transaktion
 	 * @param balance saldo efter transaktion
 	 */
-	public Transaction(int accountId, String dateTime, String transType, double amount, double balance){
+	public Transactions(int accountId, String dateTime, String transType, double amount, double balance){
 		this.accountId = accountId;
 		this.dateTime = dateTime;
 		this.transType = transType;

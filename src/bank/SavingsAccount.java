@@ -7,8 +7,10 @@ public class SavingsAccount extends Account {
 	 * Konstruktor för SavingsAccount, anropar konstruktorn i superklassen
 	 * Account
 	 *
-	 * @param accountId kontonr
-	 * @param rate räntan på kontot
+	 * @param accountId
+	 *            kontonr
+	 * @param rate
+	 *            räntan på kontot
 	 */
 	public SavingsAccount(int accountId, double rate) {
 		super(accountId);
@@ -17,10 +19,12 @@ public class SavingsAccount extends Account {
 	}
 
 	/**
+	 * Beräknar och returnerar räntan
+	 * 
 	 * @return ränta på konto
 	 */
 	@Override
 	public double calculateRate() {
-		return 1.0;
+		return getBalance() * getRate() / 100;
 	}
 }

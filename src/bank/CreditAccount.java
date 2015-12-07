@@ -26,7 +26,7 @@ public class CreditAccount extends Account {
 	public int getCredit() {
 		return credit;
 	}
-		
+
 	/**
 	 * @return Kreditränta
 	 */
@@ -37,13 +37,14 @@ public class CreditAccount extends Account {
 	/**
 	 * Uttag ett belopp från konto
 	 * 
-	 * @param amount belopp som skall ta ut på konto
+	 * @param amount
+	 *            belopp som skall ta ut på konto
 	 * @return true om uttag lyckas annars false
 	 */
 	@Override
 	public boolean withdraw(double amount) {
 		double balance = getBalance();
-		
+
 		if (balance - amount >= -credit) {
 			setBalance(balance - amount);
 			return true;
@@ -52,17 +53,20 @@ public class CreditAccount extends Account {
 	}
 
 	/**
-	 * Returnerar creditRate om saldo under 0, annars returneras rate
+	 * Beräknar och returnerar räntan. Om saldot är under 0 beräknas räntan mha
+	 * krediträntan.
 	 * 
 	 * @return ränta på konto
 	 */
 	@Override
 	public double calculateRate() {
-//		if (super.getBalance() < 0) {
-//			return creditRate;
-//		}
-//		return getRate();
-		
-		return 2.0;
+		// saldo*ränta/100
+		double r = getRate();
+
+		if (super.getBalance() < 0) {
+			r = getCreditRate();
+		}
+
+		return getBalance() * r / 100;
 	}
 }
