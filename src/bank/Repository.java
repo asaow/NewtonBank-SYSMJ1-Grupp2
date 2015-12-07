@@ -14,6 +14,7 @@ public class Repository {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/newtonbank";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
+    private boolean _debugging = true;
 
     private Connection _connection;
 
@@ -50,7 +51,7 @@ public class Repository {
 		Statement _st = _connection.createStatement();
 		ResultSet _rs = _st.executeQuery(query);
 
-		System.out.println(query);
+		if (_debugging)		System.out.println(query);
 		return _rs;
 	}
 
@@ -76,7 +77,7 @@ public class Repository {
 	        	_result = _rs.getInt(1);
 	    }
 		
-		System.out.println(query);
+		if (_debugging)		System.out.println(query);
 		return _result;
 	}
 
@@ -199,6 +200,21 @@ public class Repository {
 	}
 
 	/**
+	 * Hämta senaste transaktion som tillhör en viss konto
+	 *
+	 * @param accountId kontonr
+	 * @return transaktion eller null det inte finns några transaktioner
+	 * @throws SQLException
+	 */
+	public Transaction findLastTransaction(int accountId) throws SQLException {
+		ArrayList<Transaction> _trans;
+		
+		_trans = queryTransaction(String.format("SELECT * FROM Transaction WHERE accountId=%d ORDER BY transDate DESC LIMIT 1", accountId));
+		
+		return _trans.size() > 0 ? _trans.get(0) : null;
+	}
+
+	/**
 	 * Sök transaktion tabell med en SQL query
 	 *
 	 * @param query SQL query
@@ -211,7 +227,7 @@ public class Repository {
 		ResultSet _rs = executeQuery(query);
 		
 		while (_rs.next()) {
-			Transaction _tr = new Transaction(_rs.getInt("accountId"), _rs.getString("transType"), _rs.getString("transDate"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
+			Transaction _tr = new Transaction(_rs.getInt("accountId"), _rs.getString("transDate"), _rs.getString("transType"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
 			_trans.add(_tr);
 		}
 
@@ -285,22 +301,6 @@ public class Repository {
 	 * @throws SQLException
 	 */
 	public boolean updateAccount(Account ac) throws SQLException {
-//		int _id;
-//		double _balance;
-//		
-//		if (ac instanceof SavingsAccount) {
-//			SavingsAccount _sa = (SavingsAccount) ac;
-//			_id = _sa.getId();
-//			_balance = _sa.getBalance();
-//			
-//		} else if (ac instanceof CreditAccount) {
-//			CreditAccount _ca = (CreditAccount) ac;
-//			_id = _ca.getId();
-//			_balance = _ca.getBalance();
-//		} else
-//			return false;
-		
-		//return executeUpdate(String.format("UPDATE Account SET balance=%s WHERE accountId=%d", Double.toString(_balance), _id), false) > 0 ? true : false;
 		
 		return executeUpdate(String.format("UPDATE Account SET balance=%s WHERE accountId=%d", 
 				Double.toString(ac.getBalance()), ac.getId()), false) > 0 ? true : false;
