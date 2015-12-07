@@ -69,6 +69,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		_taOutput = new JTextArea();
 		_taOutput.setEditable(false);
+		_taOutput.setFont(new Font("Courier", Font.PLAIN, 14));
 		JScrollPane _scOutput = new JScrollPane(_taOutput);
 		_scOutput.setPreferredSize(new Dimension(500, 250));
 		
@@ -105,7 +106,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "cmdAddCustomer": case "cmdChangeCustomerName": 
 					enableComponent(true, false, true, false, true);				
 					break;
-				case "cmdShowCustomerInfo": case "cmdRemoveCustomer": case "cmdAddSavingsAccount": case "cmdAddCreditAccount": case "cmdSaveCustomerInfo": 
+				case "cmdShowCustomerInfo": case "cmdRemoveCustomer": case "cmdAddSavingsAccount": 
+				case "cmdAddCreditAccount": case "cmdSaveCustomerInfo": case "cmdSaveAccountSummary": 
 					enableComponent(true, false, false, false, true);
 					break;
 				case "cmdFindAccount": case "cmdCloseAccount":
@@ -114,7 +116,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "cmdDeposit": case "cmdWithdraw": 
 					enableComponent(true, true, false, true, true);
 					break;
-				case "cmdSaveCustomerList": case "cmdSaveAccountSummary":
+				case "cmdSaveCustomerList":
 					enableComponent(false, false, false, false, true);
 					break;
 				case "cmdDisableAll":
@@ -296,7 +298,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	private void displayMessage(String msg) {
 
-		JOptionPane.showMessageDialog(this, msg, " ", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, msg, "Meddelande", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/**
