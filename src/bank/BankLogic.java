@@ -173,7 +173,7 @@ public class BankLogic {
 		
 		Customer _cust = _db.findCustomer(pNr);
 		if (_cust != null) {
-			Account _ac = new SavingsAccount(0, 0.5);
+			Account _ac = new SavingsAccount(0, 1);
 			accountId = _db.addAccount(_ac, pNr);
 		}
 		
@@ -196,7 +196,7 @@ public class BankLogic {
 		
 		Customer _cust = _db.findCustomer(pNr);
 		if (_cust != null) {
-			Account _ac = new CreditAccount(0, 1, 7, 5000);
+			Account _ac = new CreditAccount(0, 0.5, 7, 5000);
 			accountId = _db.addAccount(_ac, pNr);
 		}
 		
@@ -262,7 +262,7 @@ public class BankLogic {
 
 			if (_success) {
 				if (_limit && _ac.getType() == SavingsAccount.ACCOUNT_TYPE) {
-					ArrayList<Transactions> _trans = _db.findTransaction(accountId);
+					ArrayList<Transaction> _trans = _db.findTransaction(accountId);
 					
 					if (_trans.size() <= 1)
 						_limit = false;
@@ -273,7 +273,7 @@ public class BankLogic {
 					_success = _db.updateAccount(_ac);	// insättning i databas
 		
 					if (_success) {
-						Transactions _tr = new Transactions(_ac.getId(), "", Transactions.TYPE_IN, amount, _ac.getBalance());
+						Transaction _tr = new Transaction(_ac.getId(), "", Transaction.TYPE_IN, amount, _ac.getBalance());
 						_db.addTransaction(_tr);
 					}
 				}
@@ -309,7 +309,7 @@ public class BankLogic {
 
 			if (_success) {
 				// skapa en trasaktion i databasen
-				Transactions _tr = new Transactions(_ac.getId(), "", Transactions.TYPE_UT, -amount, _ac.getBalance());
+				Transaction _tr = new Transaction(_ac.getId(), "", Transaction.TYPE_UT, -amount, _ac.getBalance());
 				_db.addTransaction(_tr);
 			}
 		}
@@ -355,16 +355,16 @@ public class BankLogic {
 	 */
 	public ArrayList<String> getTransactions(long pNr, int accountId) throws SQLException {
 		ArrayList<String> _result = new ArrayList<>();
-		ArrayList<Transactions> _trans;
+		ArrayList<Transaction> _trans;
 		
 		_db.connect();
 		
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
-			_result.add(String.format("Kontonr: %d  Saldo: %.2f kr  %s (%.2f\\%)", accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
+			_result.add(String.format("Kontonr: %d  Saldo: %.2f kr  %s (%.2f)", accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
 
 			_trans = _db.findTransaction(accountId);
-			for (Transactions _tr : _trans) {
+			for (Transaction _tr : _trans) {
 				_result.add(String.format("%s   %s:   %.2f kr   Saldo: %.2f kr", _tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 			}
 		}
@@ -385,7 +385,7 @@ public class BankLogic {
 	public ArrayList<String> getAccountSummary(long pNr) throws SQLException {
 		ArrayList<String> _result = new ArrayList<>();
 		ArrayList<Account> _accounts;
-		ArrayList<Transactions> _trans;
+		ArrayList<Transaction> _trans;
 		
 		_db.connect();
 		
@@ -403,7 +403,7 @@ public class BankLogic {
 				if (_trans.size() > 0)
 					_result.add("----------------------------------------------------------------------");
 				
-				for (Transactions _tr : _trans) {
+				for (Transaction _tr : _trans) {
 					_result.add(String.format("%s   %s:   %.2f kr   Saldo: %.2f kr", _tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 				}
 				

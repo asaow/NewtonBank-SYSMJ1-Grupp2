@@ -193,7 +193,7 @@ public class Repository {
 	 * @return arrayList av transaktion
 	 * @throws SQLException
 	 */
-	public ArrayList<Transactions> findTransaction(int accountId) throws SQLException {
+	public ArrayList<Transaction> findTransaction(int accountId) throws SQLException {
 		
 		return queryTransaction(String.format("SELECT * FROM Transaction WHERE accountId=%d ORDER BY transDate", accountId));
 	}
@@ -205,13 +205,13 @@ public class Repository {
 	 * @return arrayList av transaktionen
 	 * @throws SQLException
 	 */
-	public ArrayList<Transactions> queryTransaction(String query) throws SQLException {
-		ArrayList<Transactions> _trans = new ArrayList<>();
+	public ArrayList<Transaction> queryTransaction(String query) throws SQLException {
+		ArrayList<Transaction> _trans = new ArrayList<>();
 		
 		ResultSet _rs = executeQuery(query);
 		
 		while (_rs.next()) {
-			Transactions _tr = new Transactions(_rs.getInt("accountId"), _rs.getString("transType"), _rs.getString("date"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
+			Transaction _tr = new Transaction(_rs.getInt("accountId"), _rs.getString("transType"), _rs.getString("transDate"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
 			_trans.add(_tr);
 		}
 
@@ -259,7 +259,7 @@ public class Repository {
 	 * @return generera nyckel om inläggning lyckas annars -1
 	 * @throws SQLException
 	 */
-	public int addTransaction(Transactions tr) throws SQLException {
+	public int addTransaction(Transaction tr) throws SQLException {
 
 		return executeUpdate(String.format("INSERT INTO Transaction (accountId, transType, amount, balance) VALUES(%d, '%s', %s, %s)", 
 							tr.getAccountId(), tr.getType(), Double.toString(tr.getAmount()), Double.toString(tr.getBalance())), false);
