@@ -296,7 +296,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	 */
 	private void displayMessage(String msg) {
 
-		JOptionPane.showMessageDialog(this, msg, "Försök igen", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, msg, " ", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/**
