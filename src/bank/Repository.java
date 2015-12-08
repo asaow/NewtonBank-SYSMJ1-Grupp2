@@ -6,15 +6,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-//import java.util.Properties;
-
 
 public class Repository {
 	
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/newtonbank";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-    private boolean _debugging = true;
+    private boolean _debugging = false;
 
     private Connection _connection;
 
@@ -209,7 +207,7 @@ public class Repository {
 	public Transaction findLastTransaction(int accountId) throws SQLException {
 		ArrayList<Transaction> _trans;
 		
-		_trans = queryTransaction(String.format("SELECT * FROM Transaction WHERE accountId=%d ORDER BY transDate DESC LIMIT 1", accountId));
+		_trans = queryTransaction(String.format("SELECT * FROM Transaction WHERE accountId=%d AND transType='UT' ORDER BY transDate DESC LIMIT 1", accountId));
 		
 		return _trans.size() > 0 ? _trans.get(0) : null;
 	}
@@ -227,7 +225,8 @@ public class Repository {
 		ResultSet _rs = executeQuery(query);
 		
 		while (_rs.next()) {
-			Transaction _tr = new Transaction(_rs.getInt("accountId"), _rs.getString("transDate"), _rs.getString("transType"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
+			Transaction _tr = new Transaction(_rs.getInt("accountId"), _rs.getString("transType"), _rs.getDouble("amount"),  _rs.getDouble("balance"));
+			_tr.setTimestamp(_rs.getTimestamp("transDate")); 
 			_trans.add(_tr);
 		}
 
