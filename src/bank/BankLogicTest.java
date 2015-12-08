@@ -1,192 +1,316 @@
+/**
+ * 
+ */
 package bank;
 
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class BankLogicTest {
-	private BankLogic _banklogic = new BankLogic();
+/**
+ *
+ * @author Grupp2
+ */
+public class RepositiryTest {
 
+	private Repository _db;
+	private String _name;
+	private long _pNr;
+	private double _amount;
+	private int _Id;
+
+	private Customer _cust;
+	private Account _ac;
+	private SavingsAccount _sa;
+	private CreditAccount _ca;
+	private Transaction _tr;
 	
-	// Test lägga till kunder
-	@Test
-	public void testAddNewCustomer() {
-		// lägg till ny kund
-		_banklogic.addCustomer("anna", 12345);
-		Assert.assertEquals(_banklogic.getNrOfCustomers(), 1);
-
-		// lägg till ny kund
-		_banklogic.addCustomer("hampus", 234556);
-		Assert.assertEquals(_banklogic.getNrOfCustomers(), 2);
-		
-		// lägg till existera kund
-		_banklogic.addCustomer("anna", 12345);
-		Assert.assertEquals(_banklogic.getNrOfCustomers(), 2);	
-	}	
-
-	// Test om en kund existerar
-	@Test
-	public void testgetCustomerByPNr() {
-		// Hämta en kund som existerar
-		_banklogic.addCustomer("anna", 12345);
-		Assert.assertNotNull("Skall inte vara Null", _banklogic.getCustomerByPNr(12345));
-
-		// Hämta en kund som inte existerar
-		Assert.assertNull("Skall vara Null", _banklogic.getCustomerByPNr(00000));
-	}
+	private ArrayList<SavingsAccount> _sac;
+	private ArrayList<CreditAccount> _cac;
+	private ArrayList<Transaction> _trans;
 	
-	// Test hämta fram en kund och dess konto
-	@Test
-	public void testgetCustomer() {
-		int pNr = 12345;
+
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@BeforeClass
+//	public static void setUpBeforeClass() throws Exception {
+//	}
+//
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@AfterClass
+//	public static void tearDownAfterClass() throws Exception {
+//	}
+//
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		_name = "Anna Nguey";
+		_pNr = 201001012222L;
+		_amount = 10000.00;
 		
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
+		_db = new Repository();
+		_cust = new Customer(_name, _pNr);
+		_sa = new SavingsAccount(1001, 0.5);
+		_ca = new CreditAccount(1002, 1, 7, 5000);
 		
-		// skapa ett konto
-		_banklogic.addSavingsAccount(pNr);
+		_db.connect();
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 		
-		Assert.assertEquals(_banklogic.getCustomer(12345).get(0), "12345: anna");
-		Assert.assertEquals(_banklogic.getCustomerByPNr(pNr).getNrOfAccounts(), 1);
-	}
-	
-	// Test hämta fram ett konto
-	@Test
-	public void testgetAccountById() {
-		int pNr = 12345;
-		
-		// Hämta från en kund som inte existerar
-		Assert.assertNull("Skall vara Null", _banklogic.getAccountById(null, pNr));
-		
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-		
-		// skapa ett konto
-		_banklogic.addSavingsAccount(pNr);
-		
-		Assert.assertNotNull("Skall inte vara Null", _banklogic.getAccountById( _banklogic.getCustomerByPNr(pNr), 1001 ));
+		_db.removeCustomer(_cust.getPNr());
+		_db.disconnect();
 	}
 
-	// Test ändra namn på en kund
+//	/**
+//	 * Test method for {@link bank.Repository#connect()}.
+//	 */
+//	@Test
+//	public void testConnect() {
+//		try {
+//			fail("Not yet implemented");
+//			throw new SQLException();
+//		} catch (SQLException ex) {
+//		}
+//	}
+//
+//	/**
+//	 * Test method for {@link bank.Repository#findCustomer(long)}.
+//	 */
+//	@Test
+//	public void testFindCustomer() {
+//		try {
+//			fail("Not yet implemented");
+//			throw new SQLException();
+//		} catch (SQLException ex) {
+//		}
+//	}
+
+	/**
+	 * Test method for {@link bank.Repository#findAllCustomer()}.
+	 */
 	@Test
-	public void testchangeCustomerName() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-		_banklogic.changeCustomerName("hampus", pNr);
-
-		Assert.assertEquals(_banklogic.getCustomerByPNr(pNr).getName(), "hampus");
+	public void testFindAllCustomer() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// Test ta bort en kund
+	/**
+	 * Test method for {@link bank.Repository#queryCustomer(java.lang.String)}.
+	 */
 	@Test
-	public void testremoveCustomer() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-
-		// test returvärde som innehåller 2 strängar
-		Assert.assertEquals(_banklogic.removeCustomer(pNr).size(), 2);
-
-		_banklogic.addCustomer("anna", pNr);
-		_banklogic.addSavingsAccount(pNr);
-		_banklogic.addSavingsAccount(pNr);
-
-		// test returvärde som innehåller 4 strängar
-		Assert.assertEquals(_banklogic.removeCustomer(pNr).size(), 4);
+	public void testQueryCustomer() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// Test lägga till konto
+	/**
+	 * Test method for {@link bank.Repository#findAccount(long, int)}.
+	 */
 	@Test
-	public void testaddSavingsAccount() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-
-		// test om ett konto har skapat
-		Assert.assertEquals(_banklogic.addSavingsAccount(pNr), 1001);
-
-		// test om ett konto inte hade skapat
-		Assert.assertEquals(_banklogic.addSavingsAccount(0000), -1);
+	public void testFindAccount() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// hämta ett konto
+	/**
+	 * Test method for {@link bank.Repository#findAllAccount(long)}.
+	 */
 	@Test
-	public void testgetAccount() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-
-		// skapa ett konto till kunden
-		_banklogic.addSavingsAccount(pNr);
-
-		// hämta ett konto som existera
-		Assert.assertNotNull("Skall inte vara Null", _banklogic.getAccount( pNr, 1001 ));
-
-		// hämta ett konto som inte existera
-		Assert.assertNull("Skall vara Null", _banklogic.getAccount( pNr, 1005 ));
-		Assert.assertNull("Skall vara Null", _banklogic.getAccount( 0, 1001 ));
+	public void testFindAllAccount() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// Test insättning
+	/**
+	 * Test method for {@link bank.Repository#queryAccount(java.lang.String)}.
+	 */
 	@Test
-	public void testdeposit() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-
-		// skapa ett konto till kunden
-		_banklogic.addSavingsAccount(pNr);
-
-		// Test en lyckad insättning
-		Assert.assertTrue(_banklogic.deposit(pNr, 1001, 10));
-
-		// Test misslyckad insättning
-		Assert.assertFalse(_banklogic.deposit(pNr, 1005, 10));
-		Assert.assertFalse(_banklogic.deposit(0000, 1001, 10));
+	public void testQueryAccount() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// Test uttag
+	/**
+	 * Test method for {@link bank.Repository#findTransaction(int)}.
+	 */
 	@Test
-	public void testwithdraw() {
-		int pNr = 12345;
-
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
-
-		// skapa ett konto till kunden
-		_banklogic.addSavingsAccount(pNr);
-
-		// lägga till 5000 på konto
-		_banklogic.deposit(pNr, 1001, 5000);
-
-		// Test lyckat uttag
-		Assert.assertTrue(_banklogic.withdraw(pNr, 1001, 4000));
-
-		// Test misslyckat uttag
-		Assert.assertFalse(_banklogic.withdraw(pNr, 1001, 1000000));
+	public void testFindTransaction() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
 	}
 
-	// Test stänga konto
+	/**
+	 * Test method for {@link bank.Repository#findLastTransaction(int)}.
+	 */
 	@Test
-	public void testcloseAccount() {
-		int pNr = 12345;
+	public void testFindLastTransaction() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
+	}
 
-		// skapa en kund
-		_banklogic.addCustomer("anna", pNr);
+	/**
+	 * Test method for {@link bank.Repository#queryTransaction(java.lang.String)}.
+	 */
+	@Test
+	public void testQueryTransaction() {
+		try {
+			fail("Not yet implemented");
+			throw new SQLException();
+		} catch (SQLException ex) {
+		}
+	}
 
-		// skapa ett konto till kunden
-		_banklogic.addSavingsAccount(pNr);
+	/**
+	 * Test method for {@link bank.Repository#addCustomer(bank.Customer)}.
+	 */
+	@Test
+	public void testAddCustomer() {
+		try {
+			_db.addCustomer(_cust);
+			Assert.assertNotNull(_db.findCustomer(_cust.getPNr()));
+		} catch (SQLException ex) {
+		}
+	}
 
-		// stänger ett konto som existerar
-		Assert.assertNotNull("Skall inte vara Null", _banklogic.closeAccount( pNr, 1001 ));
+	/**
+	 * Test method for {@link bank.Repository#addAccount(bank.Account, long)}.
+	 */
+	@Test
+	public void testAddAccount() {
+		try {
+			_db.addCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			_Id = _db.addAccount(_sa, _cust.getPNr());
+			
+			Assert.assertNotNull(_db.findAccount(_cust.getPNr(), _Id));
+			
+		} catch (SQLException ex) {
+		}
+	}
 
-		// stänger ett konto som inte existerar
-		Assert.assertNull("Skall vara Null", _banklogic.closeAccount( pNr, 1005 ));
-		Assert.assertNull("Skall vara Null", _banklogic.closeAccount( 0000, 1001 ));
+	/**
+	 * Test method for {@link bank.Repository#addTransaction(bank.Transaction)}.
+	 */
+	@Test
+	public void testAddTransaction() {
+		try {
+			_db.addCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			_Id = _db.addAccount(_sa, _cust.getPNr());
+			
+			_tr = new Transaction(_Id, "IN", 0, 0);
+			_db.addTransaction(_tr);
+			
+			Assert.assertEquals(_db.findTransaction(_Id).size(), 1);
+			
+		} catch (SQLException ex) {
+		}
+	}
+
+	/**
+	 * Test method for {@link bank.Repository#updateCustomer(bank.Customer)}.
+	 */
+	@Test
+	public void testUpdateCustomer() {
+		try {
+			_db.addCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			_cust.setName("Cam Huynh");
+			
+			_db.updateCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			Assert.assertEquals(_cust.getName(), "Cam Huynh");
+			
+		} catch (SQLException ex) {
+		}
+	}
+
+	/**
+	 * Test method for {@link bank.Repository#updateAccount(bank.Account)}.
+	 */
+	@Test
+	public void testUpdateAccount() {
+		try {
+			_db.addCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			_Id = _db.addAccount(_sa, _cust.getPNr());
+			
+			_ac = _db.findAccount(_cust.getPNr(), _Id);
+			_ac.setBalance(5000);
+
+			_db.updateAccount(_ac);
+			_ac = _db.findAccount(_cust.getPNr(), _Id);
+
+			Assert.assertEquals(new Double(_ac.getBalance()).intValue(), 5000);
+
+		} catch (SQLException ex) {
+		}
+	}
+
+	/**
+	 * Test method for {@link bank.Repository#removeCustomer(long)}.
+	 */
+	@Test
+	public void testRemoveCustomer() {
+		try {
+			_db.addCustomer(_cust);
+			_db.removeCustomer(_cust.getPNr());
+			Assert.assertNull(_db.findCustomer(_cust.getPNr()));
+		} catch (SQLException ex) {
+		}
+	}
+
+	/**
+	 * Test method for {@link bank.Repository#removeAccount(int)}.
+	 */
+	@Test
+	public void testRemoveAccount() {
+		try {
+			_db.addCustomer(_cust);
+			_cust = _db.findCustomer(_cust.getPNr());
+			_Id = _db.addAccount(_sa, _cust.getPNr());
+			
+			_db.removeAccount(_Id);
+			
+			Assert.assertNull(_db.findAccount(_cust.getPNr(), _Id));
+		} catch (SQLException ex) {
+		}
 	}
 }
