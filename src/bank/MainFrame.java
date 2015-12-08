@@ -42,10 +42,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		_cbCommand.addItem(new KeyValue("cmdAddSavingsAccount", "Lägg till sparkonto"));
 		_cbCommand.addItem(new KeyValue("cmdAddCreditAccount", "Lägg till kreditkonto"));
 		_cbCommand.addItem(new KeyValue("cmdCloseAccount", "Ta bort konto"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "--------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdDeposit", "Insättning"));
 		_cbCommand.addItem(new KeyValue("cmdWithdraw", "Uttag"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "----------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerList", "Spara kundlista"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerInfo", "Spara kundinfo"));
 		_cbCommand.addItem(new KeyValue("cmdSaveAccountSummary", "Spara konto historik"));
