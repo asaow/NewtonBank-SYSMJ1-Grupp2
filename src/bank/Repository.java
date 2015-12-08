@@ -271,7 +271,7 @@ public class Repository {
 	 * Lägg till ny transaktion
 	 *
 	 * @param ct Transaction objekt
-	 * @return generera nyckel om inläggning lyckas annars -1
+	 * @return affected row
 	 * @throws SQLException
 	 */
 	public int addTransaction(Transaction tr) throws SQLException {
