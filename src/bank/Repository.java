@@ -203,7 +203,7 @@ public class Repository {
 	 * Hämta senaste transaktion som tillhör en viss konto
 	 *
 	 * @param accountId kontonr
-	 * @return transaktion eller null det inte finns några transaktioner
+	 * @return transaktion eller null om det inte finns några transaktioner
 	 * @throws SQLException
 	 */
 	public Transaction findLastTransaction(int accountId) throws SQLException {
