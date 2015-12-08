@@ -255,7 +255,7 @@ public class Repository {
 	 */
 	public int addAccount(Account ac, long pNr) throws SQLException {
 		int _primaryKey;
-//
+
 		if (ac instanceof CreditAccount) {
 			CreditAccount _ca = (CreditAccount) ac;
 			_primaryKey = executeUpdate(String.format("INSERT INTO Account (personNr, rate, accountType, creditRate, credit) VALUES(%d, %s, '%s', %s, %d)",	
