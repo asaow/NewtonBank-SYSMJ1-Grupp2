@@ -90,7 +90,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		_bDefaultBorder = _txtPNr.getBorder();
 		_cbCommand.setSelectedIndex(0);
-		Helper.isValidName("Cam Huynh");
 	}
 	
 	/**
