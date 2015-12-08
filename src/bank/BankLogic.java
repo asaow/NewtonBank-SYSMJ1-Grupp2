@@ -1,7 +1,8 @@
 package bank;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.SQLException;
 /**
@@ -272,7 +273,7 @@ public class BankLogic {
 					_success = _db.updateAccount(_ac);	// insättning i databas
 		
 					if (_success) {
-						Transaction _tr = new Transaction(_ac.getId(), "", Transaction.TYPE_IN, amount, _ac.getBalance());
+						Transaction _tr = new Transaction(_ac.getId(), Transaction.TYPE_IN, amount, _ac.getBalance());
 						_db.addTransaction(_tr);
 					}
 				}
@@ -301,14 +302,14 @@ public class BankLogic {
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
 			
-			if (_ac.getType() == SavingsAccount.ACCOUNT_TYPE) {
+			if (_ac.getType().equals(SavingsAccount.ACCOUNT_TYPE)) {
 
 				Transaction _tr = _db.findLastTransaction(accountId);
 				
 				if (_tr != null) {
 					SavingsAccount _sa = (SavingsAccount) _ac;
 					
-					 int _diff = LocalDate.now().getYear() - LocalDate.parse(_tr.getDateTime()).getYear();
+					 int _diff = LocalDate.now().getYear() - _tr.getTimestamp().toLocalDateTime().getYear();
 					
 					if (_diff == 0)
 						_sa.setWithdrawRate(2);
@@ -322,7 +323,7 @@ public class BankLogic {
 
 			if (_success) {
 				// skapa en trasaktion i databasen
-				Transaction _tr = new Transaction(_ac.getId(), "", Transaction.TYPE_UT, -amount, _ac.getBalance());
+				Transaction _tr = new Transaction(_ac.getId(), Transaction.TYPE_UT, -amount, _ac.getBalance());
 				_db.addTransaction(_tr);
 			}
 		}
@@ -380,7 +381,7 @@ public class BankLogic {
 			_trans = _db.findTransaction(accountId);
 			for (Transaction _tr : _trans) {
 				_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr", 
-						_tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
+						_tr.getTimestamp().toString().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 			}
 		}
 		
@@ -417,15 +418,15 @@ public class BankLogic {
 				
 				_trans = _db.findTransaction(_ac.getId());
 
-				if (_trans.size() > 0)
+				if (_accounts.size() > 0)
 					_result.add("----------------------------------------------------------------------");
 				
-				for (Transaction _tr : _trans) {
-					_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr", 
-						_tr.getDateTime().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
+				for (Transaction _tr : _trans) {			
+					_result.add(String.format("%s  %s:   %12.2f kr   Saldo: %12.2f kr", 
+						_tr.getTimestamp().toString().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 				}
 				
-				if (_trans.size() > 0)
+				if (_accounts.size() > 0)
 					_result.add("----------------------------------------------------------------------\r\n");
 			}
 		}
