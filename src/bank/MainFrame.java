@@ -32,6 +32,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 500);
 
+		// initiera combobox
 		_cbCommand = new JComboBox<>();
 		_cbCommand.addItem(new KeyValue("cmdAddCustomer", "Lägg till ny kund"));
 		_cbCommand.addItem(new KeyValue("cmdShowCustomerInfo", "Visa kund info"));
@@ -42,10 +43,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		_cbCommand.addItem(new KeyValue("cmdAddSavingsAccount", "Lägg till sparkonto"));
 		_cbCommand.addItem(new KeyValue("cmdAddCreditAccount", "Lägg till kreditkonto"));
 		_cbCommand.addItem(new KeyValue("cmdCloseAccount", "Ta bort konto"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "--------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdDeposit", "Insättning"));
 		_cbCommand.addItem(new KeyValue("cmdWithdraw", "Uttag"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "----------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerList", "Spara kundlista"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerInfo", "Spara kundinfo"));
 		_cbCommand.addItem(new KeyValue("cmdSaveAccountSummary", "Spara konto historik"));
@@ -294,7 +295,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * visa felmeddelande
+	 * Visa felmeddelande
+	 *
+	 * @param msg meddellande som skall visa
 	 */
 	private void displayMessage(String msg) {
 
@@ -317,7 +320,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * @return Validera att alla aktiva textbox värde är giltig
+	 * @return true om validering av alla aktiva textbox värde är giltig
 	 */
 	private boolean validateInput() {
 		boolean isOk = true;
@@ -351,6 +354,12 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	/**
 	 * Aktivera eller avaktivera textbox
+	 * 
+	 * @param selPNr true om pNr inmatning  skall aktivera
+	 * @param selId true om kontonr inmatning skall aktivera
+	 * @param selName true om namn inmatning skall aktivera
+	 * @param selAmount true om belopp inmatning skall aktivera
+	 * @param selOkButt true om OK knapp skall aktivera
 	 */
 	private void enableComponent(boolean selPNr, boolean selId, boolean selName, boolean selAmount, boolean selOkButt) {
 		_txtPNr.setEnabled(selPNr);
@@ -392,6 +401,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Applikation main metod
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -409,19 +421,34 @@ class KeyValue {
    private String _key;
    private String _value;
  
+   /**
+    * Konstruktor
+    * 
+    * @param key namn på nyckel
+    * @param value värde på nyckel
+    */
    public KeyValue(String key, String value) {
       _key = key;
 	  _value = value;
    }
  
+   /**
+    * @return nyckel
+    */
    public String getKey() {
       return _key;
    }
 
+   /**
+    * @return värde
+    */
    public String getValue() {
       return _value;
    }
 
+   /**
+    * @return string på denna objekt
+    */
    public String toString() {
       return _value;
    }
