@@ -1,11 +1,13 @@
 package bank;
 
+import java.sql.Timestamp;
+
 public class Transaction {
 	public static final String TYPE_UT = "UT";
 	public static final String TYPE_IN = "IN";
 
 	private int accountId;
-	private String dateTime;
+	private Timestamp timestamp;
 	private String transType;
 	private double amount;
 	private double balance;
@@ -14,14 +16,12 @@ public class Transaction {
 	 * Konstruktor
 	 *
 	 * @param accountId kontonr
-	 * @param transType transaktion typ insättning/uttag
-	 * @param dateTime datum för transaktion
+	 * @param transType transaktionstyp dvs insättning/uttag
 	 * @param amount belopp på transaktion
 	 * @param balance saldo efter transaktion
 	 */
-	public Transaction(int accountId, String dateTime, String transType, double amount, double balance){
+	public Transaction(int accountId, String transType, double amount, double balance){
 		this.accountId = accountId;
-		this.dateTime = dateTime;
 		this.transType = transType;
 		this.amount = amount;
 		this.balance = balance;
@@ -45,12 +45,20 @@ public class Transaction {
 
 	/**
 	 * Hämtar datum och tid för transaktion
-	 * @return datum och tid för transaktion
+	 * @return en timestamp objekt
 	 */
-	public String getDateTime() {
-		return dateTime;
+	public Timestamp getTimestamp() {
+		return timestamp;
 	}
-
+	
+	/**
+	 * Sätter timestamp
+	 * @param timestamp
+	 */
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
+	
 	/**
 	 * Hämtar belopp
 	 * @return belopp
