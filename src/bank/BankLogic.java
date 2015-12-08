@@ -1,8 +1,9 @@
 package bank;
 
-import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-
+import java.sql.SQLException;
 /**
  *  Klassen ska innehålla en lista med alla kunder och ett 
  *  antal publika metoder som hanterar kunder och dess konton
@@ -141,14 +142,15 @@ public class BankLogic {
 			for (Account _ac : _accounts ) {
 				_balance = _ac.getBalance();
 				_rate = _ac.calculateRate();
-				_result.add( String.format("%15s, Kontonr: %5d, Saldo: %-10.2f kr, Ränta: %-4.2f", Helper.toUpperCaseLetter(_ac.getType()), _ac.getId(), _balance, _rate ));
+				_result.add( String.format("%15s, Kontonr: %-7d, Saldo: %12.2f kr, Ränta: %7.2f kr", 
+								Helper.toUpperCaseLetter(_ac.getType()), _ac.getId(), _balance, _rate ));
 				
 				_totalBalance += _balance;
 				_totalRate += _rate;
 			}
 			
-			_result.add("\nTotala saldo: " + _totalBalance );
-			_result.add("Totala ränta:" + _totalRate);
+			_result.add(String.format("\nTotala saldo: %.2f kr", _totalBalance));
+			_result.add(String.format("Totala ränta: %.2f kr", _totalRate));
 
 			if (!_db.removeCustomer(pNr))
 				_result.clear();
@@ -223,16 +225,13 @@ public class BankLogic {
 		if (_ac != null) {
 			if (_ac instanceof SavingsAccount) {
 				SavingsAccount _sa = (SavingsAccount) _ac; 
-				_result = String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", Helper.toUpperCaseLetter(_sa.getType()), _sa.getId(), _sa.getBalance(), _sa.getRate());
+				_result = String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", 
+								Helper.toUpperCaseLetter(_sa.getType()), _sa.getId(), _sa.getBalance(), _sa.getRate());
 			} else if (_ac instanceof CreditAccount) {
 				CreditAccount _ca = (CreditAccount) _ac; 
 				_result = String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f\nKredit ränta: %.2f\nKredit: %d", 
-											Helper.toUpperCaseLetter(_ca.getType()), 
-											_ca.getId(), 
-											_ca.getBalance(), 
-											_ca.getRate(), 
-											_ca.getCreditRate(), 
-											_ca.getCredit());				
+									Helper.toUpperCaseLetter(_ca.getType()), _ca.getId(), _ca.getBalance(), 
+										_ca.getRate(), _ca.getCreditRate(), _ca.getCredit());
 			}
 		}
 		
@@ -296,15 +295,29 @@ public class BankLogic {
 	 */
 	public boolean withdraw(long pNr, int accountId, double amount) throws SQLException {
 		boolean _success = false;
-		int _limit = 0;
 		
 		_db.connect();
 		
 		Account _ac = _db.findAccount(pNr, accountId);
-		if (_ac != null) { 
- 			 _success = _ac.withdraw(amount);
+		if (_ac != null) {
+			
+			if (_ac.getType() == SavingsAccount.ACCOUNT_TYPE) {
 
- 			 if (_success)
+				Transaction _tr = _db.findLastTransaction(accountId);
+				
+				if (_tr != null) {
+					SavingsAccount _sa = (SavingsAccount) _ac;
+					
+					 int _diff = LocalDate.now().getYear() - LocalDate.parse(_tr.getDateTime()).getYear();
+					
+					if (_diff == 0)
+						_sa.setWithdrawRate(2);
+				}
+			}
+
+			_success = _ac.withdraw(amount);
+
+ 			if (_success)
 			  	_success = _db.updateAccount(_ac);
 
 			if (_success) {
@@ -361,11 +374,13 @@ public class BankLogic {
 		
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
-			_result.add(String.format("Kontonr: %d  Saldo: %.2f kr  %s (%.2f)", accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
+			_result.add(String.format("Kontonr: %d  Saldo: %12.2f kr  %s (%.2f%%)", 
+					accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
 
 			_trans = _db.findTransaction(accountId);
 			for (Transaction _tr : _trans) {
-				_result.add(String.format("%s   %s:   %.2f kr   Saldo: %.2f kr", _tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
+				_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr", 
+						_tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 			}
 		}
 		
@@ -391,12 +406,14 @@ public class BankLogic {
 		
 		Customer _cust = _db.findCustomer(pNr);
 		if (_cust != null) {
-			_result.add(String.format("Personnr: %d, Namn: %s\n", _cust.getPNr(), _cust.getName()));
+			_result.add(String.format("Personnr: %d,   Namn: %s,   Datum: %s %s\r\n", 
+				_cust.getPNr(), _cust.getName(), LocalDate.now(), LocalTime.now().toString().substring(0, 8)));
 			
 			_accounts = _db.findAllAccount(pNr);
 			
 			for (Account _ac : _accounts) {
-				_result.add(String.format("Kontonr: %d  Saldo: %.2f kr  %s (%.2f\\%)", _ac.getId(), _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
+				_result.add(String.format("Kontonr: %d  Saldo: %12.2f kr  %s (%.2f%%)", 
+					_ac.getId(), _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
 				
 				_trans = _db.findTransaction(_ac.getId());
 
@@ -404,11 +421,12 @@ public class BankLogic {
 					_result.add("----------------------------------------------------------------------");
 				
 				for (Transaction _tr : _trans) {
-					_result.add(String.format("%s   %s:   %.2f kr   Saldo: %.2f kr", _tr.getDateTime(), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
+					_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr", 
+						_tr.getDateTime().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 				}
 				
 				if (_trans.size() > 0)
-					_result.add("----------------------------------------------------------------------");
+					_result.add("----------------------------------------------------------------------\r\n");
 			}
 		}
 		
