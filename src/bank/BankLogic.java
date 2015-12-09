@@ -1,6 +1,5 @@
 package bank;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -349,8 +348,11 @@ public class BankLogic {
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
 			
-			if (_db.removeAccount(accountId))		
-				_result = String.format("Saldo: %.2f\nRänta: %.2f", _ac.getBalance(), _ac.calculateRate());
+			if (_db.removeAccount(accountId)) {		
+				_result = String.format("\n   Saldo:     %.2f kr\n   Ränta:     %.2f kr\n", _ac.getBalance(), _ac.calculateRate());
+				_result += "   -------------------------------------------------\n";
+				_result += String.format("   Återbetala belopp: %.2f kr\n", _ac.getBalance() + _ac.calculateRate());
+			}
 		}
 		
 		_db.disconnect();
