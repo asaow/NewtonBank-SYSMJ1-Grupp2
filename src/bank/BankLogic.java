@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.SQLException;
 /**
- *  Klassen ska innehålla en lista med alla kunder och ett 
- *  antal publika metoder som hanterar kunder och dess konton
+ *  Klassen ska hantera ett bank med kunder, sparkonto och kreditkonto 
+ *  Det finns ett antal publika metoder som hanterar kunder och dess konton
  */
 public class BankLogic {
 	private Repository _db;
@@ -54,7 +54,6 @@ public class BankLogic {
 		_db.connect();
 		if (_db.findCustomer(pNr) != null)
 			_success = false;
-
 		else
 			_success = _db.addCustomer( new Customer(name, pNr) ) == 0 ? false : true;
 		
@@ -251,30 +250,19 @@ public class BankLogic {
 	 */
 	public boolean deposit(long pNr, int accountId, double amount) throws SQLException {	
 		boolean _success = false;
-		boolean _limit = true; 			// sätta av/på uttag begränsning
 		
 		_db.connect();
 		
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
-			_success = _ac.deposit(amount);				// insättning i Account
+			_success = _ac.deposit(amount);			// insättning i Account
 
 			if (_success) {
-				if (_limit && _ac.getType() == SavingsAccount.ACCOUNT_TYPE) {
-					ArrayList<Transaction> _trans = _db.findTransaction(accountId);
-					
-					if (_trans.size() <= 1)
-						_limit = false;
-				} else
-					_limit = false;
-				
-				if (!_limit) {
-					_success = _db.updateAccount(_ac);	// insättning i databas
-		
-					if (_success) {
-						Transaction _tr = new Transaction(_ac.getId(), Transaction.TYPE_IN, amount, _ac.getBalance());
-						_db.addTransaction(_tr);
-					}
+				_success = _db.updateAccount(_ac);	// insättning i databas
+	
+				if (_success) {
+					Transaction _tr = new Transaction(_ac.getId(), Transaction.TYPE_IN, amount, _ac.getBalance());
+					_db.addTransaction(_tr);
 				}
 			}
 		}
@@ -307,11 +295,11 @@ public class BankLogic {
 				
 				if (_tr != null) {
 					SavingsAccount _sa = (SavingsAccount) _ac;
-					
-					 int _diff = LocalDate.now().getYear() - _tr.getTimestamp().toLocalDateTime().getYear();
+					// check ett fritt uttag/år
+					int _diff = LocalDate.now().getYear() - _tr.getTimestamp().toLocalDateTime().getYear();
 					
 					if (_diff == 0)
-						_sa.setWithdrawRate(2);
+						_sa.setWithdrawRate(2);			// uttag avgift på 2% om man gör fler uttag/år
 				}
 			}
 
