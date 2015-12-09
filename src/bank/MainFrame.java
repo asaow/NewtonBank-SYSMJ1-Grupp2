@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.sql.SQLException;
 
 public class MainFrame extends JFrame implements ActionListener {
-
+	private static final long serialVersionUID = -7920924260406616668L;
+	
 	private JTextField _txtPNr;
 	private JTextField _txtId;
 	private JTextField _txtName;
@@ -38,15 +39,15 @@ public class MainFrame extends JFrame implements ActionListener {
 		_cbCommand.addItem(new KeyValue("cmdShowCustomerInfo", "Visa kund info"));
 		_cbCommand.addItem(new KeyValue("cmdChangeCustomerName", "Ändra kundens namn"));
 		_cbCommand.addItem(new KeyValue("cmdRemoveCustomer", "Ta bort kund"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "------------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdFindAccount", "Sök konto"));
 		_cbCommand.addItem(new KeyValue("cmdAddSavingsAccount", "Lägg till sparkonto"));
 		_cbCommand.addItem(new KeyValue("cmdAddCreditAccount", "Lägg till kreditkonto"));
 		_cbCommand.addItem(new KeyValue("cmdCloseAccount", "Ta bort konto"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "--------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "-------------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdDeposit", "Insättning"));
 		_cbCommand.addItem(new KeyValue("cmdWithdraw", "Uttag"));
-		_cbCommand.addItem(new KeyValue("cmdDisableAll", "----------------------------------"));
+		_cbCommand.addItem(new KeyValue("cmdDisableAll", "---------------------------------------"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerList", "Spara kundlista"));
 		_cbCommand.addItem(new KeyValue("cmdSaveCustomerInfo", "Spara kundinfo"));
 		_cbCommand.addItem(new KeyValue("cmdSaveAccountSummary", "Spara konto historik"));
@@ -187,7 +188,7 @@ public class MainFrame extends JFrame implements ActionListener {
 						_accountId = _bankLogic.addSavingsAccount(_pNr);
 						
 						if (_accountId == -1)
-							displayMessage("Kan inte lägga till sparkonto");
+							displayMessage("Kan inte lägga till sparkonto. Försök igen.");
 						else
 							displayMessage(String.format("Nytt sparkonto skapades\nmed kontonr %d", _accountId));
 
@@ -198,7 +199,7 @@ public class MainFrame extends JFrame implements ActionListener {
 						_accountId = _bankLogic.addCreditAccount(_pNr);
 						
 						if (_accountId == -1)
-							displayMessage("Kan inte lägga till kreditkonto");
+							displayMessage("Kan inte lägga till kreditkonto. Försök igen.");
 						else
 							displayMessage(String.format("Nytt kreditkonto skapades\nmed kontonr %d", _accountId));
 						
@@ -348,6 +349,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		} else
 			_txtAmount.setBackground(Color.white);
 
+		if (!isOk)
+			Toolkit.getDefaultToolkit().beep();
+		
 		return isOk;
 	}
 
