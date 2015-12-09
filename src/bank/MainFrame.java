@@ -71,7 +71,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		_taOutput = new JTextArea();
 		_taOutput.setEditable(false);
-		_taOutput.setFont(new Font("Courier", Font.PLAIN, 14));
+		_taOutput.setFont(new Font("Courier New", Font.PLAIN, 14));
 		JScrollPane _scOutput = new JScrollPane(_taOutput);
 		_scOutput.setPreferredSize(new Dimension(500, 250));
 		
