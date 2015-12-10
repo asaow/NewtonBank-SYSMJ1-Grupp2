@@ -28,10 +28,10 @@ public class BankLogic {
 		ArrayList<String> _list = new ArrayList<>();
 		
 		_db.connect();
-		_list.add("Personnr       Namn");
+		_list.add("\nPersonnr       Namn");
 		
 		for (Customer _cust : _db.findAllCustomer()) {
-			_list.add(String.format("%d:   %s", _cust.getPNr(), _cust.getName()));
+			_list.add(String.format("%d   %s", _cust.getPNr(), _cust.getName()));
 		}
 		
 		_db.disconnect();

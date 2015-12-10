@@ -36,6 +36,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		// initiera combobox
 		_cbCommand = new JComboBox<>();
 		_cbCommand.addItem(new KeyValue("cmdAddCustomer", "Lägg till ny kund"));
+		_cbCommand.addItem(new KeyValue("cmdShowCustomerList", "Visa kundlista"));
 		_cbCommand.addItem(new KeyValue("cmdShowCustomerInfo", "Visa kund info"));
 		_cbCommand.addItem(new KeyValue("cmdChangeCustomerName", "Ändra kundens namn"));
 		_cbCommand.addItem(new KeyValue("cmdRemoveCustomer", "Ta bort kund"));
@@ -117,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "cmdDeposit": case "cmdWithdraw": 
 					enableComponent(true, true, false, true, true);
 					break;
-				case "cmdSaveCustomerList":
+				case "cmdShowCustomerList": case "cmdSaveCustomerList":
 					enableComponent(false, false, false, false, true);
 					break;
 				case "cmdDisableAll":
@@ -251,13 +252,17 @@ public class MainFrame extends JFrame implements ActionListener {
 							displayMessage(String.format("Uttag %.2f kr misslyckas\nKontrollera kontonr och belopp", _amount));						
 						
 						break;
-					case "cmdSaveCustomerList":
+					case "cmdShowCustomerList": case "cmdSaveCustomerList":
 						_result = _bankLogic.getCustomers();
 						_data = Helper.listToString(_result);
 
-						_path = getPath();
-						if (_path != null)	
-							Helper.saveToFile(_path, _data);
+						if (_command.equals("cmdShowCustomerList")) {
+							_taOutput.setText(_data);
+						} else {
+							_path = getPath();
+							if (_path != null)	
+								Helper.saveToFile(_path, _data);
+						}
 						
 						break;
 					case "cmdSaveCustomerInfo": case "cmdShowCustomerInfo":
@@ -267,7 +272,7 @@ public class MainFrame extends JFrame implements ActionListener {
 						if (_result.size() > 0) {
 							_data = Helper.listToString(_result);
 		
-							if (_command == "cmdSaveCustomerInfo") {
+							if (_command.equals("cmdSaveCustomerInfo")) {
 								_path = getPath();
 								if (_path != null)	
 									Helper.saveToFile(_path, _data);
