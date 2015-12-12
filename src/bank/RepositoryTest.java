@@ -96,8 +96,9 @@ public class RepositoryTest {
 	@Test
 	public void testFindAllCustomer() {
 		try {
+			int allCustomer = _db.findAllCustomer().size();
 			_db.addCustomer(_cust);
-			Assert.assertEquals(_db.findAllCustomer().size(), 1);
+			Assert.assertEquals(_db.findAllCustomer().size(), allCustomer + 1);
 		} catch (SQLException ex) {
 		}
 	}

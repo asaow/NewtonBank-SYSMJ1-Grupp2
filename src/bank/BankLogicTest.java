@@ -14,13 +14,13 @@ import java.sql.SQLException;
 
 /**
  * @author Grupp2
- *
  */
 public class BankLogicTest {
 
 	private BankLogic _bankLogic;
 	private String _name;
 	private long _pNr;
+	private int _accountId;
 	private double _amount;
 	
 	/**
@@ -43,7 +43,7 @@ public class BankLogicTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		_name = "Anna Nguey";
+		_name = "Test Name";
 		_pNr = 201001012222L;
 		_amount = 10000.00;
 
@@ -76,8 +76,11 @@ public class BankLogicTest {
 	@Test
 	public void testGetCustomers() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			int allCustomer = _bankLogic.getCustomers().size();
+			_bankLogic.addCustomer(_name, _pNr);
+			
+			Assert.assertEquals(_bankLogic.getCustomers().size(), allCustomer + 1);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -99,8 +102,9 @@ public class BankLogicTest {
 	@Test
 	public void testGetCustomer() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			Assert.assertNotEquals(_bankLogic.getCustomer(_pNr).size(), 0);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -111,8 +115,11 @@ public class BankLogicTest {
 	@Test
 	public void testChangeCustomerName() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_bankLogic.changeCustomerName("New Name", _pNr);
+			
+			Assert.assertNotEquals(_bankLogic.getCustomer(_pNr).get(0).indexOf("New Name"), -1);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -135,8 +142,10 @@ public class BankLogicTest {
 	@Test
 	public void testAddSavingsAccount() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			
+			Assert.assertNotEquals(_bankLogic.addSavingsAccount(_pNr), -1);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -147,8 +156,10 @@ public class BankLogicTest {
 	@Test
 	public void testAddCreditAccount() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			
+			Assert.assertNotEquals(_bankLogic.addCreditAccount(_pNr), -1);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -159,8 +170,11 @@ public class BankLogicTest {
 	@Test
 	public void testGetAccount() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			
+			Assert.assertNotNull(_bankLogic.getAccount(_pNr, _accountId));
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -171,8 +185,10 @@ public class BankLogicTest {
 	@Test
 	public void testDeposit() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			
+			Assert.assertTrue(_bankLogic.deposit(_pNr, _accountId, _amount));
 		} catch (SQLException ex) {
 		}
 	}
@@ -183,8 +199,12 @@ public class BankLogicTest {
 	@Test
 	public void testWithdraw() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			_bankLogic.deposit(_pNr, _accountId, _amount);
+			
+			Assert.assertTrue(_bankLogic.withdraw(_pNr, _accountId, _amount));
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -195,8 +215,11 @@ public class BankLogicTest {
 	@Test
 	public void testCloseAccount() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			
+			Assert.assertNotNull(_bankLogic.closeAccount(_pNr, _accountId));
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -207,8 +230,12 @@ public class BankLogicTest {
 	@Test
 	public void testGetTransactions() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			_bankLogic.deposit(_pNr, _accountId, _amount);
+			
+			Assert.assertNotEquals(_bankLogic.getTransactions(_pNr, _accountId).size(), 0);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -219,8 +246,12 @@ public class BankLogicTest {
 	@Test
 	public void testGetAccountSummary() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			_accountId = _bankLogic.addSavingsAccount(_pNr);
+			_bankLogic.deposit(_pNr, _accountId, _amount);
+			
+			Assert.assertNotEquals(_bankLogic.getAccountSummary(_pNr).size(), 0);
+			
 		} catch (SQLException ex) {
 		}
 	}
