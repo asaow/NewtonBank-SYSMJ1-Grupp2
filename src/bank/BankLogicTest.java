@@ -39,6 +39,8 @@ public class BankLogicTest {
 	}
 
 	/**
+	 * Kör i början på varje test case
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -51,11 +53,13 @@ public class BankLogicTest {
 	}
 
 	/**
+	 * Kör i sluten på varje test case
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@After
 	public void tearDown() throws Exception {
-		_bankLogic.removeCustomer(_pNr);
+		_bankLogic.removeCustomer(_pNr);	// tömma databas
 	}
 
 	/**
@@ -91,7 +95,9 @@ public class BankLogicTest {
 	@Test
 	public void testAddCustomer() {
 		try {
+			
 			Assert.assertTrue(_bankLogic.addCustomer(_name, _pNr));
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -103,6 +109,7 @@ public class BankLogicTest {
 	public void testGetCustomer() {
 		try {
 			_bankLogic.addCustomer(_name, _pNr);
+			
 			Assert.assertNotEquals(_bankLogic.getCustomer(_pNr).size(), 0);
 			
 		} catch (SQLException ex) {
@@ -130,8 +137,10 @@ public class BankLogicTest {
 	@Test
 	public void testRemoveCustomer() {
 		try {
-			fail("Not yet implemented");
-			throw new SQLException();
+			_bankLogic.addCustomer(_name, _pNr);
+			
+			Assert.assertNotEquals(_bankLogic.removeCustomer(_pNr).size(), 0);
+			
 		} catch (SQLException ex) {
 		}
 	}
@@ -189,6 +198,7 @@ public class BankLogicTest {
 			_accountId = _bankLogic.addSavingsAccount(_pNr);
 			
 			Assert.assertTrue(_bankLogic.deposit(_pNr, _accountId, _amount));
+			
 		} catch (SQLException ex) {
 		}
 	}
