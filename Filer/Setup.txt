@@ -1,7 +1,7 @@
 
 Det finns 2 alternative för att köra applikationen
 1) kör som en executable jar
-2) pull ner projekt och och köra i eclipse
+2) pull ner projekt och köra i eclipse
 
 
 Alternativ 1
