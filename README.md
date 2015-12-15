@@ -12,7 +12,7 @@ Projektuppgiften skall resultera i en körbar applikation i form av
 en JAR-fil samt ett datatbasscript för MySQL för att generera
 tillhörande databas
 
-Setup insruktion finns på /Filer/setup.txt
+Setup instruktion finns på /Filer/setup.txt
 
 Gruppsmedlemmar: Hampus B, Åsa W, Anna Ng, Cam H, Hamid R
 
