@@ -77,7 +77,7 @@ public class BankLogic {
 		
 		Customer _cust = _db.findCustomer(pNr);
 		if (_cust != null) {		
-			_list.add( String.format("Personnr: %d\r\nNamn: %s\r\n", _cust.getPNr(), _cust.getName()));
+			_list.add( String.format("\r\nPersonnr: %d\r\nNamn: %s\r\n", _cust.getPNr(), _cust.getName()));
 
 			ArrayList<Account> _accounts = _db.findAllAccount(pNr);
 			for (Account _ac : _accounts) {
@@ -224,11 +224,11 @@ public class BankLogic {
 		if (_ac != null) {
 			if (_ac instanceof SavingsAccount) {
 				SavingsAccount _sa = (SavingsAccount) _ac; 
-				_result = String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", 
+				_result = String.format("\nTyp: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f", 
 								Helper.toUpperCaseLetter(_sa.getType()), _sa.getId(), _sa.getBalance(), _sa.getRate());
 			} else if (_ac instanceof CreditAccount) {
 				CreditAccount _ca = (CreditAccount) _ac; 
-				_result = String.format("Typ: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f\nKredit ränta: %.2f\nKredit: %d", 
+				_result = String.format("\nTyp: %s\nKontonr: %d\nSaldo:  %.2f\nRänta: %.2f\nKredit ränta: %.2f\nKredit: %d", 
 									Helper.toUpperCaseLetter(_ca.getType()), _ca.getId(), _ca.getBalance(), 
 										_ca.getRate(), _ca.getCreditRate(), _ca.getCredit());
 			}
@@ -365,7 +365,7 @@ public class BankLogic {
 		
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
-			_result.add(String.format("Kontonr: %d  Saldo: %12.2f kr  %s (%.2f%%)", 
+			_result.add(String.format("\nKontonr: %d  Saldo: %12.2f kr  %s (%.2f%%)\n", 
 					accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
 
 			_trans = _db.findTransaction(accountId);

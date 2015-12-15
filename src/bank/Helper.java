@@ -1,4 +1,4 @@
-package bank;
+﻿package bank;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -127,7 +127,7 @@ public class Helper {
 	 * Konvertera arrayList till en strämg
 	 *
 	 * @param arrStr arrayList av strängar
-	 * @return en strämg
+	 * @return en sträng
 	 */
 	public static String listToString(ArrayList<String> arrStr) {
 		StringBuffer _sb = new StringBuffer();
