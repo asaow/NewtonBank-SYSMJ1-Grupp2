@@ -1,4 +1,5 @@
-﻿package bank;
+package bank;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,16 +7,18 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 /**
- * Klassen Helper innehåler olika hjälp metoder för att 
+ * Klassen Helper innehåler olika hjälpmetoder för att 
  * checka format på en sträng.
+ * 
+ * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
  */
 public class Helper {
 	
 	/**
 	 * Checka om strängen är ett personnr
 	 *
-	 * @param pNr personnr som skall checka
-	 * @return true om personnr är ett giltig nr annars false
+	 * @param pNr personnr som skall checkas
+	 * @return true om personnr är ett giltigt nr annars false
 	 */
 	public static boolean isValidPNr(String pNr) {
 		if (pNr.length() != 12)
@@ -48,8 +51,8 @@ public class Helper {
 	/**
 	 * Checka om strängen är ett namn
 	 *
-	 * @param name namnet som skall checka
-	 * @return true om namnet är giltig namn annars false
+	 * @param name namnet som skall checkas
+	 * @return true om namnet är giltigt namn annars false
 	 */
 	public static boolean isValidName(String name) {
 
@@ -65,16 +68,16 @@ public class Helper {
 	}
 
 	/**
-	 * Checka om strängen är ett giltig tal
+	 * Checka om strängen är ett giltigt tal
 	 *
-	 * @param nr tal som skall checka
-	 * @return true om ett tal är giltig annars false
+	 * @param nr tal som skall checkas
+	 * @return true om ett tal är giltigt annars false
 	 */
 	public static boolean isValidNr(String nr) {
 		try {
 			Double num = Double.parseDouble(nr);
 			
-			// negativa tal ej tillåten
+			// negativa tal ej tillåtet
 			if (num < 0) return false;
 
 			String[] arrName = num.toString().split("\\.");
@@ -94,8 +97,8 @@ public class Helper {
 	/**
 	 * Checka om strängen är ett kontonr
 	 *
-	 * @param nr kontonr som skall checka
-	 * @return true om kontonr är ett giltig nr annars false
+	 * @param nr kontonr som skall checkas
+	 * @return true om kontonr är ett giltigt nr annars false
 	 */
 	public static boolean isValidAccountId(String nr) {
 		try {
@@ -111,8 +114,8 @@ public class Helper {
 	/**
 	 * Konvertera namnet till stora bokstäver
 	 *
-	 * @param name namn som skall konvertera
-	 * @return namnet med stora bokstäver på första tecken
+	 * @param name namn som skall konverteras
+	 * @return namnet med stora bokstäver på första tecknet
 	 */
 	public static String toUpperCaseLetter(String name) {
 		String[] arrWord = name.split(" ");
@@ -124,7 +127,7 @@ public class Helper {
 	}
 
 	/**
-	 * Konvertera arrayList till en strämg
+	 * Konvertera arrayList till en sträng
 	 *
 	 * @param arrStr arrayList av strängar
 	 * @return en sträng
@@ -143,8 +146,8 @@ public class Helper {
 	 * Spara till fil
 	 *
 	 * @param path sökväg till filen
-	 * @param data sträng som skall spara
-	 * @return true om filen lyckas sparat annars false
+	 * @param data sträng som skall sparas
+	 * @return true om filen lyckats sparas annars false
 	 */
 	public static boolean saveToFile(Path path, String data) {
 

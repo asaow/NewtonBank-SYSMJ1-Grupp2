@@ -2,6 +2,12 @@ package bank;
 
 import java.sql.Timestamp;
 
+/**
+ * Transaction håller information om en transaktion.
+ * 
+ * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
+ *
+ */
 public class Transaction {
 	public static final String TYPE_UT = "UT";
 	public static final String TYPE_IN = "IN";
@@ -15,52 +21,62 @@ public class Transaction {
 	/**
 	 * Konstruktor
 	 *
-	 * @param accountId kontonr
-	 * @param transType transaktionstyp dvs insättning/uttag
-	 * @param amount belopp på transaktion
-	 * @param balance saldo efter transaktion
+	 * @param accountId
+	 *            kontonr
+	 * @param transType
+	 *            transaktionstyp dvs insättning/uttag
+	 * @param amount
+	 *            belopp på transaktion
+	 * @param balance
+	 *            saldo efter transaktion
 	 */
-	public Transaction(int accountId, String transType, double amount, double balance){
+	public Transaction(int accountId, String transType, double amount, double balance) {
 		this.accountId = accountId;
 		this.transType = transType;
 		this.amount = amount;
 		this.balance = balance;
 	}
-	
+
 	/**
 	 * Hämtar konto id
+	 * 
 	 * @return konto id
 	 */
-	public int getAccountId(){
+	public int getAccountId() {
 		return accountId;
 	}
-	
+
 	/**
 	 * Sätter konto id
-	 * @param accountId konto id
+	 * 
+	 * @param accountId
+	 *            konto id
 	 */
-	public void setAccountId(int accountId){
+	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
 
 	/**
 	 * Hämtar datum och tid för transaktion
+	 * 
 	 * @return en timestamp objekt
 	 */
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
-	
+
 	/**
 	 * Sätter timestamp
-	 * @param timestamp
+	 * 
+	 * @param timestamp tid nu
 	 */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+
 	/**
 	 * Hämtar belopp
+	 * 
 	 * @return belopp
 	 */
 	public double getAmount() {
@@ -69,7 +85,9 @@ public class Transaction {
 
 	/**
 	 * Sätter belopp
-	 * @param amount belopp
+	 * 
+	 * @param amount
+	 *            belopp
 	 */
 	public void setAmount(double amount) {
 		this.amount = amount;
@@ -77,6 +95,7 @@ public class Transaction {
 
 	/**
 	 * Hämtar saldo
+	 * 
 	 * @return saldo efter transaktion
 	 */
 	public double getBalance() {
@@ -85,7 +104,9 @@ public class Transaction {
 
 	/**
 	 * Sätter saldo
-	 * @param balance saldo på konto
+	 * 
+	 * @param balance
+	 *            saldo på konto
 	 */
 	public void setBalance(double balance) {
 		this.balance = balance;
@@ -93,6 +114,7 @@ public class Transaction {
 
 	/**
 	 * Hämtar transaktionstyp
+	 * 
 	 * @return transaktionstyp
 	 */
 	public String getType() {
@@ -100,8 +122,9 @@ public class Transaction {
 	}
 
 	/**
-	 * Sätter transaktionstyp
-	 * @param type typ av transaktion
+	 *  Sätter transaktionstyp            
+	 * 
+	 * @param transType typ av transaktion
 	 */
 	public void setType(String transType) {
 		this.transType = transType;

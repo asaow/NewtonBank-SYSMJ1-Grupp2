@@ -1,5 +1,11 @@
 package bank;
 
+/**
+ * Account, abstrakt klass, superklass till SavingsAccount och CreditAccount.
+ *  
+ * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
+ *
+ */
 public abstract class Account {
 	private double balance;
 	private double rate;
@@ -9,7 +15,7 @@ public abstract class Account {
 	/**
 	 * Konstruktor
 	 * 
-	 * @param accountId
+	 * @param accountId kontonummer
 	 */
 	public Account(int accountId) {
 		this.accountId = accountId;

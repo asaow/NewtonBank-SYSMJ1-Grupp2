@@ -1,5 +1,14 @@
 package bank;
 
+/**
+ * CreditAccount, subklass till Account.
+ * 
+ * Håller information om ett kreditkonto och har metoder för bl a transaktioner
+ * samt ränteberäkningar.
+ * 
+ * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
+ *
+ */
 public class CreditAccount extends Account {
 	public static final String ACCOUNT_TYPE = "KREDITKONTO";
 
@@ -8,9 +17,12 @@ public class CreditAccount extends Account {
 
 	/**
 	 * Konstruktor för CreditAccount, anropar konstruktorn i superklassen
-	 * Account
+	 * Account.
 	 * 
-	 * @param accountId
+	 * @param accountId kontonummer
+	 * @param rate räntesats
+	 * @param creditRate krediträntesats
+	 * @param credit kreditgräns
 	 */
 	public CreditAccount(int accountId, double rate, double creditRate, int credit) {
 		super(accountId);
@@ -21,24 +33,24 @@ public class CreditAccount extends Account {
 	}
 
 	/**
-	 * @return Kreditgräns
+	 * @return kreditgräns
 	 */
 	public int getCredit() {
 		return credit;
 	}
 
 	/**
-	 * @return Kreditränta
+	 * @return krediträntesats
 	 */
 	public double getCreditRate() {
 		return creditRate;
 	}
 
 	/**
-	 * Uttag ett belopp från konto
+	 * Uttag av ett belopp från konto
 	 * 
 	 * @param amount
-	 *            belopp som skall ta ut på konto
+	 *            belopp som skall tas ut på konto
 	 * @return true om uttag lyckas annars false
 	 */
 	@Override
