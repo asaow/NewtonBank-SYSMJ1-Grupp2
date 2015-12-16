@@ -10,6 +10,11 @@ public class Customer {
 	private String name;
 	private long pNr;
 
+	/**
+	 * Konstruktor till Customer
+	 * @param name kundens namn
+	 * @param pNr kundens personnummer
+	 */
 	public Customer(String name, long pNr) {
 		this.name = name;
 		this.pNr = pNr;

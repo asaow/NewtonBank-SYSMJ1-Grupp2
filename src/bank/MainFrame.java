@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.sql.SQLException;
 
 /**
- * MainFrame hanterar GUI.
+ * MainFrame innehåller main-metod samt hanterar GUI.
  * 
  * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
  *
@@ -32,7 +32,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	/**
 	 * Konstruktor
 	 * 
-	 * @param title titel
+	 * @param title
+	 *            titel
 	 */
 	public MainFrame(String title) {
 		setTitle(title);
@@ -332,6 +333,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	/**
+	 * Returnerar sökväg efter användare har valt en fil i FileChoose dialog
+	 * 
 	 * @return sökväg efter användare har valt en fil i FileChoose dialog
 	 */
 	private Path getPath() {
@@ -346,6 +349,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	/**
+	 * Returnerar true om validering av alla aktiva textbox-värden är giltiga
+	 * 
 	 * @return true om validering av alla aktiva textbox-värden är giltiga
 	 */
 	private boolean validateInput() {
@@ -437,7 +442,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	/**
 	 * Main-metod
-	 * @param args args
+	 * 
+	 * @param args
+	 *            args
 	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {

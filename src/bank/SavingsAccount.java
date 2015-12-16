@@ -63,6 +63,8 @@ public class SavingsAccount extends Account {
 	}
 
 	/**
+	 * Returnerar ränta på konto
+	 * 
 	 * @return ränta på konto
 	 */
 	@Override

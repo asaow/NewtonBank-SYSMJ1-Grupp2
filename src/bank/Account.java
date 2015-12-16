@@ -2,7 +2,7 @@ package bank;
 
 /**
  * Account, abstrakt klass, superklass till SavingsAccount och CreditAccount.
- *  
+ * 
  * @author Grupp 2 (Hampus B, Åsa W, Anna N, Cam H, Hamid R)
  *
  */
@@ -13,9 +13,10 @@ public abstract class Account {
 	private String type;
 
 	/**
-	 * Konstruktor
+	 * Konstruktor till Account
 	 * 
-	 * @param accountId kontonummer
+	 * @param accountId
+	 *            kontonummer
 	 */
 	public Account(int accountId) {
 		this.accountId = accountId;
@@ -23,6 +24,8 @@ public abstract class Account {
 	}
 
 	/**
+	 * Returnerar saldo på konto
+	 * 
 	 * @return saldo på konto
 	 */
 	public double getBalance() {
@@ -30,6 +33,8 @@ public abstract class Account {
 	}
 
 	/**
+	 * Returnerar ränta på konto
+	 * 
 	 * @return ränta på konto
 	 */
 	public double getRate() {
@@ -37,31 +42,37 @@ public abstract class Account {
 	}
 
 	/**
-	 * @return kontonr
+	 * Returnerar kontonummer
+	 * 
+	 * @return kontonummer
 	 */
 	public int getId() {
 		return accountId;
 	}
 
 	/**
-	 * sätta ränta på konto
+	 * Sätta ränta på konto
 	 * 
-	 * @param rate ränta på konto
+	 * @param rate
+	 *            ränta på konto
 	 */
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
 
 	/**
-	 * sätta saldo på konto
+	 * Sätta saldo på konto
 	 * 
-	 * @param balance saldo på beloppet
+	 * @param balance
+	 *            saldo på beloppet
 	 */
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
 	/**
+	 * Returnerar typ av konto
+	 * 
 	 * @return vilken typ av konto
 	 */
 	public String getType() {
@@ -69,16 +80,17 @@ public abstract class Account {
 	}
 
 	/**
-	 * sätta kontotyp
+	 * Sätta kontotyp
 	 * 
-	 * @param type kontotyp
+	 * @param type
+	 *            kontotyp
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
 	/**
-	 * Abstrakt metod
+	 * Abstrakt metod Returnerar räntan i respektive kontoklass
 	 * 
 	 * @return räntan i respektive kontoklass
 	 */
@@ -87,7 +99,8 @@ public abstract class Account {
 	/**
 	 * Insättning på konto
 	 * 
-	 * @param amount belopp som skall lägga till konto
+	 * @param amount
+	 *            belopp som skall lägga till konto
 	 * @return true om insättning lyckades annars false
 	 */
 	public boolean deposit(double amount) {
@@ -100,10 +113,10 @@ public abstract class Account {
 	}
 
 	/**
-	 * Abstrakt metod 
-	 * Uttag från konto
+	 * Abstrakt metod Uttag från konto
 	 * 
-	 * @param amount belopp som skall ta ut på konto
+	 * @param amount
+	 *            belopp som skall ta ut på konto
 	 * @return true om uttag lyckas annars false
 	 */
 	public abstract boolean withdraw(double amount);

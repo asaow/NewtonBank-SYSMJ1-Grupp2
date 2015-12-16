@@ -19,7 +19,7 @@ public class Transaction {
 	private double balance;
 
 	/**
-	 * Konstruktor
+	 * Konstruktor till Transaction
 	 *
 	 * @param accountId
 	 *            kontonr

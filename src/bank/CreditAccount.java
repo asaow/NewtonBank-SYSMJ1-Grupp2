@@ -19,10 +19,14 @@ public class CreditAccount extends Account {
 	 * Konstruktor för CreditAccount, anropar konstruktorn i superklassen
 	 * Account.
 	 * 
-	 * @param accountId kontonummer
-	 * @param rate räntesats
-	 * @param creditRate krediträntesats
-	 * @param credit kreditgräns
+	 * @param accountId
+	 *            kontonummer
+	 * @param rate
+	 *            räntesats
+	 * @param creditRate
+	 *            krediträntesats
+	 * @param credit
+	 *            kreditgräns
 	 */
 	public CreditAccount(int accountId, double rate, double creditRate, int credit) {
 		super(accountId);
@@ -33,6 +37,8 @@ public class CreditAccount extends Account {
 	}
 
 	/**
+	 * Returnerar kreditgräns
+	 * 
 	 * @return kreditgräns
 	 */
 	public int getCredit() {
@@ -40,6 +46,8 @@ public class CreditAccount extends Account {
 	}
 
 	/**
+	 * Returnerar krediträntesats
+	 * 
 	 * @return krediträntesats
 	 */
 	public double getCreditRate() {
