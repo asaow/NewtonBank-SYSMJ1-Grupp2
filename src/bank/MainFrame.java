@@ -227,9 +227,13 @@ public class MainFrame extends JFrame implements ActionListener {
 					_pNr = Long.parseLong(_txtPNr.getText());
 					_accountId = Integer.parseInt(_txtId.getText());
 					_result = _bankLogic.getTransactions(_pNr, _accountId);
-					_data = Helper.listToString(_result);
-
-					_taOutput.setText(_data);
+					
+					if (_result.size() == 0)
+						displayMessage("Konto finns inte.\nKontrollera personnr och kontonr.");
+					else {
+						_data = Helper.listToString(_result);
+						_taOutput.setText(_data);
+					}
 
 					break;
 				case "cmdCloseAccount":

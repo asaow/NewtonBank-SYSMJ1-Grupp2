@@ -408,19 +408,18 @@ public class BankLogic {
 
 		Account _ac = _db.findAccount(pNr, accountId);
 		if (_ac != null) {
-			_result.add(String.format("\nKontonr: %d  Saldo: %12.2f kr  %s (%.2f%%)\n", accountId, _ac.getBalance(),
-					Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
+			_result.add(String.format("\nKontonr: %d     Saldo: %.2f kr     %s (%.2f%%)\n", 
+					accountId, _ac.getBalance(), Helper.toUpperCaseLetter(_ac.getType()), _ac.getRate()));
 
 			_trans = _db.findTransaction(accountId);
 			for (Transaction _tr : _trans) {
-				_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr",
-						_tr.getTimestamp().toString().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()),
-						_tr.getAmount(), _tr.getBalance()));
+				_result.add(String.format("%s   %s:   %12.2f kr   Saldo: %12.2f kr", 
+						_tr.getTimestamp().toString().substring(0, 19), Helper.toUpperCaseLetter(_tr.getType()), _tr.getAmount(), _tr.getBalance()));
 			}
 		}
-
+		
 		_db.disconnect();
-
+		
 		return _result;
 	}
 
