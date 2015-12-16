@@ -14,5 +14,5 @@ tillhörande databas
 
 Setup instruktion finns på /Filer/setup.txt
 
-Gruppsmedlemmar: Hampus B, Åsa W, Anna Ng, Cam H, Hamid R
+Gruppsmedlemmar: Hampus B, Åsa W, Anna N, Cam H, Hamid R
 
